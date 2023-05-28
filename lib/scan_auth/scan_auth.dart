@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
+import 'package:riyad/bottom_nav_bar/bottom_nav_bar.dart';
 import 'package:riyad/core/app_colors.dart';
 
 class ScanAuth extends StatefulWidget {
@@ -43,7 +44,20 @@ class _ScanAuthState extends State<ScanAuth> {
                     Text(
                         'Barcode Type: ${describeEnum(result!.format)}   Data: ${result!.code}')
                   else
-                    const Text('Scan a code'),
+                    Column(
+                      children: [
+                        const Text('Scan a code'),
+                        ElevatedButton(
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (_) =>
+                                          const AppBottomNavigationBar()));
+                            },
+                            child: const Text("Home"))
+                      ],
+                    ),
                 ],
               ),
             ),

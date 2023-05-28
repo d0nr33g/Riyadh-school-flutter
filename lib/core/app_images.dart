@@ -7,4 +7,5 @@ class AppImages {
   static const String locationSvg = "$_baseSvg/location.svg";
   static const String cameraSvg = "$_baseSvg/camera.svg";
   static const String fingerPrintSvg = "$_baseSvg/fingerprint.svg";
+  static const String getReadySvg = "$_baseSvg/get_ready.svg";
 }
