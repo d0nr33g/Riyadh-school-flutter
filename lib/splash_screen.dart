@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:riyad/core/app_colors.dart';
 import 'package:riyad/core/app_images.dart';
-import 'package:riyad/scan_auth/scan_auth.dart';
+import 'package:riyad/modules/scan_auth/scan_auth.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:riyad/home/home_screen.dart';
+import 'package:riyad/core/app_colors.dart';
+import 'package:riyad/modules/attendance/attendance_screen.dart';
+import 'package:riyad/modules/home/home_screen.dart';
+import 'package:riyad/modules/notifications/notification_screen.dart';
+import 'package:riyad/modules/settings/settings_screen.dart';
 
 class AppBottomNavigationBar extends StatefulWidget {
   const AppBottomNavigationBar({super.key});
@@ -12,15 +16,9 @@ class _AppBottomNavigationBarState extends State<AppBottomNavigationBar> {
   int _selectedIndex = 0;
   static const List<Widget> _widgetOptions = <Widget>[
     HomeScreen(),
-    Text(
-      'Index 1: Business',
-    ),
-    Text(
-      'Index 2: School',
-    ),
-    Text(
-      'Index 2: School',
-    ),
+    NotificationScreen(),
+    AttendanceScreen(),
+    SettingsScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -45,20 +43,20 @@ class _AppBottomNavigationBarState extends State<AppBottomNavigationBar> {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.business),
-            label: 'Business',
+            icon: Icon(Icons.account_circle_outlined),
+            label: 'notification',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.school),
-            label: 'School',
+            icon: Icon(Icons.date_range),
+            label: 'attendance',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.school),
-            label: 'School',
+            icon: Icon(Icons.settings),
+            label: 'Settings',
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber[800],
+        selectedItemColor: AppColors.primaryColor,
         onTap: _onItemTapped,
       ),
     );
