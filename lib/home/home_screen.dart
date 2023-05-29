@@ -24,7 +24,6 @@ class _HomeScreenState extends State<HomeScreen> {
           bool didAuthenticate = await localAuth.authenticate(
             localizedReason: 'Scan your fingerprint to authenticate',
           );
-
           if (didAuthenticate) {
             print('Fingerprint authentication succeeded');
           } else {

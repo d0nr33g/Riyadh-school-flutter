@@ -18,6 +18,9 @@ class _AppBottomNavigationBarState extends State<AppBottomNavigationBar> {
     Text(
       'Index 2: School',
     ),
+    Text(
+      'Index 2: School',
+    ),
   ];
 
   void _onItemTapped(int index) {
@@ -35,6 +38,7 @@ class _AppBottomNavigationBarState extends State<AppBottomNavigationBar> {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
@@ -43,6 +47,10 @@ class _AppBottomNavigationBarState extends State<AppBottomNavigationBar> {
           BottomNavigationBarItem(
             icon: Icon(Icons.business),
             label: 'Business',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.school),
+            label: 'School',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.school),
