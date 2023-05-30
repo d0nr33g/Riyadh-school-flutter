@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:riyad/core/app_colors.dart';
+import 'package:riyad/core/app_images.dart';
 import 'package:riyad/modules/attendance/attendance_screen.dart';
 import 'package:riyad/modules/home/home_screen.dart';
 import 'package:riyad/modules/notifications/notification_screen.dart';
@@ -37,21 +39,25 @@ class _AppBottomNavigationBarState extends State<AppBottomNavigationBar> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        items: const <BottomNavigationBarItem>[
+        items:  <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            activeIcon: SvgPicture.asset(AppImages.selectedHomeSvg),
+            icon:SvgPicture.asset(AppImages.homeSvg),
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle_outlined),
+            activeIcon: SvgPicture.asset(AppImages.selectedNotificationsSvg),
+            icon: SvgPicture.asset(AppImages.accountSvg),
             label: 'notification',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.date_range),
+            activeIcon: SvgPicture.asset(AppImages.selectedAttendSvg),
+            icon:SvgPicture.asset(AppImages.calendarSvg),
             label: 'attendance',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
+            activeIcon: SvgPicture.asset(AppImages.selectedSettingsSvg),
+            icon: SvgPicture.asset(AppImages.settingsSvg),
             label: 'Settings',
           ),
         ],

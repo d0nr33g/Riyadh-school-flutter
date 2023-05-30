@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:riyad/core/app_colors.dart';
 import 'package:riyad/core/app_images.dart';
 import 'package:riyad/modules/scan_auth/scan_auth.dart';
@@ -33,7 +34,7 @@ class _SplashScreenState extends State<SplashScreen> {
       body: Center(
         child:
             Column(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-          Image.asset(AppImages.logoImage),
+              SvgPicture.asset(AppImages.logoImage),
           const CircularProgressIndicator(
             color: Colors.white,
           )
