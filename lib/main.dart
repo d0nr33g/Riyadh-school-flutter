@@ -1,10 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_translate/flutter_translate.dart';
+import 'package:riyad/app_observer.dart';
 import 'package:riyad/core/app_theme.dart';
+import 'package:riyad/localization/translate_preferences.dart';
 import 'package:riyad/splash_screen.dart';
 
-void main(List<String> args) {
-  runApp(const App());
+Future<void> main() async {
+  debugPrint("############ welcome in dev ############");
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations(<DeviceOrientation>[
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
+  
+var delegate = await  LocalizationDelegate.create(
+          preferences: TranslatePreferences(),
+          fallbackLocale: 'en',
+          supportedLocales: <String>['en', 'ar'])
+      .then((LocalizationDelegate delegate) {
+    BlocOverrides.runZoned(
+      () => runApp(LocalizedApp(delegate, App())),
+      blocObserver: AppBlocObserver(),
+    );
+  });
 }
 
 class App extends StatelessWidget {
@@ -12,14 +34,27 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(
-        designSize: const Size(430, 32),
-        builder: (BuildContext context, Widget? widget) {
-          return MaterialApp(
-            debugShowCheckedModeBanner: false,
-            theme: AppTheme.light(),
-            home: const SplashScreen(),
-          );
-        });
+      var localizationDelegate = LocalizedApp.of(context).delegate;
+
+    return LocalizationProvider(
+      state: LocalizationProvider.of(context).state,
+      child: ScreenUtilInit(
+          designSize: const Size(430, 32),
+          builder: (BuildContext context, Widget? widget) {
+            return MaterialApp(
+              localizationsDelegates: [
+                GlobalMaterialLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                localizationDelegate
+              ],
+              supportedLocales: localizationDelegate.supportedLocales,
+              locale: localizationDelegate.currentLocale,
+              debugShowCheckedModeBanner: false,
+              theme: AppTheme.light(),
+              home: const SplashScreen(),
+            );
+          }),
+    );
   }
 }
