@@ -6,7 +6,6 @@ import 'package:local_auth/local_auth.dart';
 import 'package:riyad/core/app_colors.dart';
 import 'package:riyad/core/app_images.dart';
 import 'package:riyad/core/app_theme.dart';
-
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -15,6 +14,9 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  bool checkin=false;
+  bool checkout=false;
+  bool getReady=false;
   Future<void> fetchBiometricData() async {
     final localAuth = LocalAuthentication();
 
@@ -28,6 +30,9 @@ class _HomeScreenState extends State<HomeScreen> {
             localizedReason: 'Scan your fingerprint to authenticate',
           );
           if (didAuthenticate) {
+            setState(() {
+              checkin=true;
+            });
             print('Fingerprint authentication succeeded');
           } else {
             print('Fingerprint authentication failed');
@@ -52,7 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
       debugPrint(e);
     });
   }
-
+  
   @override
   void initState() {
     // TODO: implement initState
@@ -93,14 +98,42 @@ class _HomeScreenState extends State<HomeScreen> {
               formattedDate,
               textAlign: TextAlign.center,
               style:AppTheme.latoTheme.displayLarge!.copyWith(
-                fontSize: 25
+                fontSize: 25,color: AppColors.textColor
                ) ,
             ),
-            InkWell(
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+
+                Column(
+                  children: [
+                       InkWell(
                 onTap: () {
                   fetchBiometricData();
                 },
-                child: SvgPicture.asset(AppImages.checkineSvg)),
+                child:checkin? SvgPicture.asset(AppImages.checkoutSvg):SvgPicture.asset(AppImages.checkineSvg)),
+                  ],
+                ),
+          
+                Column(mainAxisSize: MainAxisSize.min,crossAxisAlignment: CrossAxisAlignment.end,mainAxisAlignment: MainAxisAlignment.end
+                  ,children: [
+                    checkin==false?
+                    Stack(
+                      children: [
+                          SvgPicture.asset(AppImages.notificationCircleSvg),
+                        Positioned(bottom: 20,right: 18,child: Text("27",style: AppTheme.latoTheme.displayMedium!.copyWith(
+                          color: AppColors.whiteColor,fontWeight: FontWeight.bold
+                        ),)),
+                      
+                      ],
+                    ):Container(width:MediaQuery.of(context).size.width/5,),
+                  
+                ],)
+
+              ],
+            ),
+         SizedBox(height: 20,),
             const Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

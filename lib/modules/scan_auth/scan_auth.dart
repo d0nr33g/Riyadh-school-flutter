@@ -8,6 +8,7 @@ import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:riyad/bottom_nav_bar/bottom_nav_bar.dart';
 import 'package:riyad/core/app_colors.dart';
 import 'package:riyad/core/app_images.dart';
+import 'package:riyad/modules/scan_auth/dailog_component.dart';
 
 class ScanAuth extends StatefulWidget {
   const ScanAuth({Key? key}) : super(key: key);
@@ -48,13 +49,14 @@ class _ScanAuthState extends State<ScanAuth> {
                   else
                   InkWell(
                     onTap: (){
-                       Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (_) =>
-                                          const AppBottomNavigationBar()));
+                      showLocationDialog(context);
+                     
                     },
-                    child:SvgPicture.asset(AppImages.scanSvg) ,
+                    child:Container(
+                      height: 100,
+                      width: 100,
+                      child: SvgPicture.asset(AppImages.scanSvg),
+                    ) ,
                   ),
           
                 ],

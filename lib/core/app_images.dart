@@ -31,4 +31,5 @@ class AppImages {
   static const String clockSvg = "$_baseSvg/clock.svg";
   static const String clockActiveSvg = "$_baseSvg/clock_active.svg";
   static const String checkineSvg = "$_baseSvg/checkin.svg";
+  static const String checkoutSvg = "$_baseSvg/checkout.svg";
 }

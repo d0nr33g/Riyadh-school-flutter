@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:riyad/bottom_nav_bar/bottom_nav_bar.dart';
 import 'package:riyad/core/app_colors.dart';
 import 'package:riyad/core/app_images.dart';
 import 'package:riyad/core/app_theme.dart';
@@ -16,7 +17,7 @@ Future<void> showLocationDialog(context) async {
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
         child: SizedBox(
           width: 317.0, // Custom width
-          height: 405.0, // Custom height
+          height: 410.0, // Custom height
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -116,7 +117,7 @@ Future<void> showCameraDialog(context) async {
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
         child: SizedBox(
           width: 317.0, // Custom width
-          height: 405.0, // Custom height
+          height: 410.0, // Custom height
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -216,7 +217,7 @@ Future<void> showFingerprintDialog(context) async {
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
         child: SizedBox(
           width: 317.0, // Custom width
-          height: 405.0, // Custom height
+          height: 420.0, // Custom height
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -339,6 +340,7 @@ getCameraPermission(context) async {
 }
 
 getFingerprintPermission(context) async {
+
   final LocalAuthentication auth = LocalAuthentication();
 
   final List<BiometricType> availableBiometrics =
@@ -346,5 +348,10 @@ getFingerprintPermission(context) async {
 
   if (availableBiometrics.isNotEmpty) {
     Navigator.pop(context);
+        Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (_) =>
+                                          const AppBottomNavigationBar()));
   }
 }
