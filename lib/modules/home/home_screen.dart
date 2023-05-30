@@ -6,6 +6,7 @@ import 'package:local_auth/local_auth.dart';
 import 'package:riyad/core/app_colors.dart';
 import 'package:riyad/core/app_images.dart';
 import 'package:riyad/core/app_theme.dart';
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -14,9 +15,9 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  bool checkin=false;
-  bool checkout=false;
-  bool getReady=false;
+  bool checkin = false;
+  bool checkout = false;
+  bool getReady = false;
   Future<void> fetchBiometricData() async {
     final localAuth = LocalAuthentication();
 
@@ -31,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
           );
           if (didAuthenticate) {
             setState(() {
-              checkin=true;
+              checkin = true;
             });
             print('Fingerprint authentication succeeded');
           } else {
@@ -57,7 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
       debugPrint(e);
     });
   }
-  
+
   @override
   void initState() {
     // TODO: implement initState
@@ -78,62 +79,76 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             Column(
               children: [
-            const CircleAvatar(
-              radius: 30,
-              backgroundImage: NetworkImage("https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg"),
-            ),
-            SizedBox(height: 10,),
-             Text("4545454",style: AppTheme.latoTheme.displayMedium,),
-            const Text("ID Number"),
+                const CircleAvatar(
+                  radius: 30,
+                  backgroundImage: NetworkImage(
+                      "https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg"),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  "4545454",
+                  style: AppTheme.latoTheme.displayMedium,
+                ),
+                const Text("ID Number"),
               ],
             ),
-
-            Text(
-              formattedTime,
-              textAlign: TextAlign.center,
-              style:AppTheme.latoTheme.displayLarge!.copyWith(
-                fontSize: 51
-              )),
+            Text(formattedTime,
+                textAlign: TextAlign.center,
+                style: AppTheme.latoTheme.displayLarge!.copyWith(fontSize: 51)),
             Text(
               formattedDate,
               textAlign: TextAlign.center,
-              style:AppTheme.latoTheme.displayLarge!.copyWith(
-                fontSize: 25,color: AppColors.textColor
-               ) ,
+              style: AppTheme.latoTheme.displayLarge!
+                  .copyWith(fontSize: 25, color: AppColors.textColor),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-
                 Column(
                   children: [
-                       InkWell(
-                onTap: () {
-                  fetchBiometricData();
-                },
-                child:checkin? SvgPicture.asset(AppImages.checkoutSvg):SvgPicture.asset(AppImages.checkineSvg)),
+                    InkWell(
+                        onTap: () {
+                          fetchBiometricData();
+                        },
+                        child: checkin
+                            ? SvgPicture.asset(AppImages.checkoutSvg)
+                            : SvgPicture.asset(AppImages.checkineSvg)),
                   ],
                 ),
-          
-                Column(mainAxisSize: MainAxisSize.min,crossAxisAlignment: CrossAxisAlignment.end,mainAxisAlignment: MainAxisAlignment.end
-                  ,children: [
-                    checkin==false?
-                    Stack(
-                      children: [
-                          SvgPicture.asset(AppImages.notificationCircleSvg),
-                        Positioned(bottom: 20,right: 18,child: Text("27",style: AppTheme.latoTheme.displayMedium!.copyWith(
-                          color: AppColors.whiteColor,fontWeight: FontWeight.bold
-                        ),)),
-                      
-                      ],
-                    ):Container(width:MediaQuery.of(context).size.width/5,),
-                  
-                ],)
-
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    checkin == false
+                        ? Stack(
+                            children: [
+                              SvgPicture.asset(AppImages.notificationCircleSvg),
+                              Positioned(
+                                  bottom: 20,
+                                  right: 18,
+                                  child: Text(
+                                    "27",
+                                    style: AppTheme.latoTheme.displayMedium!
+                                        .copyWith(
+                                            color: AppColors.whiteColor,
+                                            fontWeight: FontWeight.bold),
+                                  )),
+                            ],
+                          )
+                        : Container(
+                            width: MediaQuery.of(context).size.width / 5,
+                          ),
+                  ],
+                )
               ],
             ),
-         SizedBox(height: 20,),
+            SizedBox(
+              height: 20,
+            ),
             const Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -153,9 +168,13 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Column(
                     children: [
                       SvgPicture.asset(AppImages.timeInSvg),
-                      SizedBox(height: 10,),
-                       Text("09:10", style:AppTheme.latoTheme.displayLarge!),
-                          SizedBox(height: 10,),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text("09:10", style: AppTheme.latoTheme.displayLarge!),
+                      SizedBox(
+                        height: 10,
+                      ),
                       const Text("Checkin")
                     ],
                   ),
@@ -164,9 +183,13 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Column(
                     children: [
                       SvgPicture.asset(AppImages.timeOutSvg),
-                          SizedBox(height: 10,),
-                       Text("--:--", style:AppTheme.latoTheme.displayLarge!),
-                          SizedBox(height: 10,),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text("--:--", style: AppTheme.latoTheme.displayLarge!),
+                      SizedBox(
+                        height: 10,
+                      ),
                       const Text("Checkout")
                     ],
                   ),
@@ -175,17 +198,21 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Column(
                     children: [
                       SvgPicture.asset(AppImages.timertSvg),
-                          SizedBox(height: 10,),
-                       Text("--:--", style:AppTheme.latoTheme.displayLarge!),
-                          SizedBox(height: 10,),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text("--:--", style: AppTheme.latoTheme.displayLarge!),
+                      SizedBox(
+                        height: 10,
+                      ),
                       const Text("working hr's")
                     ],
                   ),
                 ),
               ],
             ),
-            const SizedBox(
-              height: 37,
+            SizedBox(
+              height: 10,
             ),
           ],
         ),

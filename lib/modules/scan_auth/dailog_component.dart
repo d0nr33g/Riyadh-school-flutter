@@ -17,7 +17,7 @@ Future<void> showLocationDialog(context) async {
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
         child: SizedBox(
           width: 317.0, // Custom width
-          height: 410.0, // Custom height
+          height: 412.0, // Custom height
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -117,7 +117,7 @@ Future<void> showCameraDialog(context) async {
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
         child: SizedBox(
           width: 317.0, // Custom width
-          height: 410.0, // Custom height
+          height: 412.0, // Custom height
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -217,7 +217,7 @@ Future<void> showFingerprintDialog(context) async {
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
         child: SizedBox(
           width: 317.0, // Custom width
-          height: 420.0, // Custom height
+          height: 422.0, // Custom height
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
