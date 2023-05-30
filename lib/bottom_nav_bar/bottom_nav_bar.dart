@@ -38,27 +38,29 @@ class _AppBottomNavigationBarState extends State<AppBottomNavigationBar> {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: AppColors.whiteColor,
+        elevation: 0,
         type: BottomNavigationBarType.fixed,
         items:  <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             activeIcon: SvgPicture.asset(AppImages.selectedHomeSvg),
             icon:SvgPicture.asset(AppImages.homeSvg),
-            label: 'Home',
+            label: 'HOME',
           ),
           BottomNavigationBarItem(
             activeIcon: SvgPicture.asset(AppImages.selectedNotificationsSvg),
             icon: SvgPicture.asset(AppImages.accountSvg),
-            label: 'notification',
+            label: 'NOTIFICATION',
           ),
           BottomNavigationBarItem(
             activeIcon: SvgPicture.asset(AppImages.selectedAttendSvg),
             icon:SvgPicture.asset(AppImages.calendarSvg),
-            label: 'attendance',
+            label: 'ATTENDANCE',
           ),
           BottomNavigationBarItem(
             activeIcon: SvgPicture.asset(AppImages.selectedSettingsSvg),
             icon: SvgPicture.asset(AppImages.settingsSvg),
-            label: 'Settings',
+            label: 'SETTINGS',
           ),
         ],
         currentIndex: _selectedIndex,

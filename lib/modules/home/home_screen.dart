@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:riyad/core/app_colors.dart';
 import 'package:riyad/core/app_images.dart';
+import 'package:riyad/core/app_theme.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -70,28 +71,36 @@ class _HomeScreenState extends State<HomeScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const CircleAvatar(),
-            const Text("8686484864468"),
-            const Text("Id-Number"),
+            Column(
+              children: [
+            const CircleAvatar(
+              radius: 30,
+              backgroundImage: NetworkImage("https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg"),
+            ),
+            SizedBox(height: 10,),
+             Text("4545454",style: AppTheme.latoTheme.displayMedium,),
+            const Text("ID Number"),
+              ],
+            ),
+
             Text(
               formattedTime,
               textAlign: TextAlign.center,
-              style:
-                  const TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0),
-            ),
+              style:AppTheme.latoTheme.displayLarge!.copyWith(
+                fontSize: 51
+              )),
             Text(
               formattedDate,
               textAlign: TextAlign.center,
-              style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 25.0,
-                  color: AppColors.textColor),
+              style:AppTheme.latoTheme.displayLarge!.copyWith(
+                fontSize: 25
+               ) ,
             ),
             InkWell(
                 onTap: () {
                   fetchBiometricData();
                 },
-                child: SvgPicture.asset(AppImages.getReadySvg)),
+                child: SvgPicture.asset(AppImages.checkineSvg)),
             const Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -99,7 +108,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 SizedBox(
                   width: 10,
                 ),
-                Text("location: you are not in office reach"),
+                Text("Location : You Are Not In Office Reach"),
               ],
             ),
             const SizedBox(
@@ -111,7 +120,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Column(
                     children: [
                       SvgPicture.asset(AppImages.timeInSvg),
-                      const Text("09:10"),
+                      SizedBox(height: 10,),
+                       Text("09:10", style:AppTheme.latoTheme.displayLarge!),
+                          SizedBox(height: 10,),
                       const Text("Checkin")
                     ],
                   ),
@@ -120,7 +131,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Column(
                     children: [
                       SvgPicture.asset(AppImages.timeOutSvg),
-                      const Text("--:--"),
+                          SizedBox(height: 10,),
+                       Text("--:--", style:AppTheme.latoTheme.displayLarge!),
+                          SizedBox(height: 10,),
                       const Text("Checkout")
                     ],
                   ),
@@ -129,7 +142,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Column(
                     children: [
                       SvgPicture.asset(AppImages.timertSvg),
-                      const Text("--:--"),
+                          SizedBox(height: 10,),
+                       Text("--:--", style:AppTheme.latoTheme.displayLarge!),
+                          SizedBox(height: 10,),
                       const Text("working hr's")
                     ],
                   ),

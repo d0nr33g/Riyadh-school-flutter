@@ -7,14 +7,15 @@ class AppTheme {
   static TextTheme latoTheme = TextTheme(
     bodySmall: TextStyle(fontSize: 10.sp, fontFamily: fontFamily),
     labelSmall: TextStyle(fontSize: 12.sp, fontFamily: fontFamily),
-    bodyLarge: TextStyle(fontSize: 14.sp, fontFamily: fontFamily),
-    bodyMedium: TextStyle(fontSize: 16.sp, fontFamily: fontFamily),
-    displayLarge: TextStyle(fontSize: 38.sp, fontFamily: fontFamily),
-    displayMedium: TextStyle(fontSize: 28.sp, fontFamily: fontFamily),
-    displaySmall: TextStyle(fontSize: 18.sp, fontFamily: fontFamily),
-    labelLarge: TextStyle(fontSize: 20.sp, fontFamily: fontFamily),
-    titleMedium: TextStyle(fontSize: 13.sp, fontFamily: fontFamily),
-    titleSmall: TextStyle(fontSize: 15.sp, fontFamily: fontFamily),
+    titleSmall: TextStyle(fontSize: 14.sp, fontFamily: fontFamily),
+    displaySmall: TextStyle(fontSize: 16.sp, fontFamily: fontFamily),
+    bodyMedium: TextStyle(fontSize: 18.sp, fontFamily: fontFamily),
+    bodyLarge: TextStyle(fontSize: 20.sp, fontFamily: fontFamily),
+    displayMedium: TextStyle(fontSize: 22.sp, fontFamily: fontFamily),
+    displayLarge: TextStyle(fontSize: 24.sp, fontFamily: fontFamily),
+    labelLarge: TextStyle(fontSize: 26.sp, fontFamily: fontFamily),
+   
+  
   );
 
   static ThemeData light() {

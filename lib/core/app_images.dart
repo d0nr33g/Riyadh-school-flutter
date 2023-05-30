@@ -28,4 +28,7 @@ class AppImages {
   static const String accountSvg = "$_baseSvg/account.svg";
   static const String calendarSvg = "$_baseSvg/calendar.svg";
   static const String settingsSvg = "$_baseSvg/settings.svg";
+  static const String clockSvg = "$_baseSvg/clock.svg";
+  static const String clockActiveSvg = "$_baseSvg/clock_active.svg";
+  static const String checkineSvg = "$_baseSvg/checkin.svg";
 }
