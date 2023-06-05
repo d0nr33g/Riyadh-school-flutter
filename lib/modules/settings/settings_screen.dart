@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:riyad/core/app_colors.dart';
 import 'package:riyad/core/app_images.dart';
 import 'package:riyad/core/app_theme.dart';
 import 'package:riyad/modules/scan_auth/scan_auth.dart';
+import 'package:riyad/modules/settings/about_us.dart';
+import 'package:riyad/modules/settings/language.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -53,8 +56,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 ],
               ),
               ListTile(
-                onTap: () {},
-                title: Text("LANGUAGES",
+                onTap: () {showLanguageDialog(context);},
+                title: Text(translate("language"),
                     style: AppTheme.latoTheme.bodyMedium!
                         .copyWith(fontWeight: FontWeight.w500)),
                 leading: SvgPicture.asset(AppImages.translateSvg),
@@ -67,7 +70,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 leading: SvgPicture.asset(AppImages.callSvg),
               ),
               ListTile(
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (_)=>AboutUS()));
+                },
                 title: Text("ABOUT US",
                     style: AppTheme.latoTheme.bodyMedium!
                         .copyWith(fontWeight: FontWeight.w500)),
