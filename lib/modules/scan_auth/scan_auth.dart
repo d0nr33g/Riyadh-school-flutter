@@ -29,7 +29,6 @@ class _ScanAuthState extends State<ScanAuth> {
     }
     controller!.resumeCamera();
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,7 +48,11 @@ class _ScanAuthState extends State<ScanAuth> {
                   else
                   InkWell(
                     onTap: (){
-                      showLocationDialog(context);
+                           Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (_) =>
+                                          const AppBottomNavigationBar()));
                      
                     },
                     child:Container(

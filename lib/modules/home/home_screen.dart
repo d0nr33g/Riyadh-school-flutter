@@ -186,7 +186,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       SizedBox(
                         height: 10,
                       ),
-                      Text("--:--", style: AppTheme.latoTheme.displayLarge!),
+                      Text("00:00", style: AppTheme.latoTheme.displayLarge!),
                       SizedBox(
                         height: 10,
                       ),
@@ -201,7 +201,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       SizedBox(
                         height: 10,
                       ),
-                      Text("--:--", style: AppTheme.latoTheme.displayLarge!),
+                      Text("00:00", style: AppTheme.latoTheme.displayLarge!),
                       SizedBox(
                         height: 10,
                       ),

@@ -6,6 +6,7 @@ import 'package:riyad/bottom_nav_bar/bottom_nav_bar.dart';
 import 'package:riyad/core/app_colors.dart';
 import 'package:riyad/core/app_images.dart';
 import 'package:riyad/core/app_theme.dart';
+import 'package:riyad/modules/scan_auth/scan_auth.dart';
 
 Future<void> showLocationDialog(context) async {
   return showDialog<void>(
@@ -16,7 +17,7 @@ Future<void> showLocationDialog(context) async {
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
         child: SizedBox(
-          width: 317.0, // Custom width
+          width: MediaQuery.of(context).size.width/1, // Custom width
           height: 412.0, // Custom height
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -116,7 +117,7 @@ Future<void> showCameraDialog(context) async {
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
         child: SizedBox(
-          width: 317.0, // Custom width
+           width: MediaQuery.of(context).size.width/1, // Custom width
           height: 412.0, // Custom height
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -216,7 +217,7 @@ Future<void> showFingerprintDialog(context) async {
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
         child: SizedBox(
-          width: 317.0, // Custom width
+        width: MediaQuery.of(context).size.width/1, // Custom width
           height: 422.0, // Custom height
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -348,10 +349,10 @@ getFingerprintPermission(context) async {
 
   if (availableBiometrics.isNotEmpty) {
     Navigator.pop(context);
-        Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (_) =>
-                                          const AppBottomNavigationBar()));
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (_) => const ScanAuth()),
+          (route) => false);
+ 
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:riyad/core/app_colors.dart';
 import 'package:riyad/core/app_images.dart';
+import 'package:riyad/modules/scan_auth/dailog_component.dart';
 import 'package:riyad/modules/scan_auth/scan_auth.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -19,11 +20,9 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   goNext() {
-    Future.delayed(const Duration(seconds: 2), () {
-      Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(builder: (_) => const ScanAuth()),
-          (route) => false);
+    Future.delayed(const Duration(seconds: 3), () {
+        showLocationDialog(context);
+  
     });
   }
 
