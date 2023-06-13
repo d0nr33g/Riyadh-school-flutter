@@ -8,9 +8,10 @@ import 'package:riyad/app_observer.dart';
 import 'package:riyad/core/app_theme.dart';
 import 'package:riyad/localization/translate_preferences.dart';
 import 'package:riyad/modules/home/bloc/clock_cubit.dart';
+import 'package:riyad/modules/scan_auth/bloc/auth_bloc.dart';
 import 'package:riyad/splash_screen.dart';
 
-Future<void> main() async {
+ main() async {
   debugPrint("############ welcome in dev ############");
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations(<DeviceOrientation>[
@@ -46,7 +47,10 @@ class App extends StatelessWidget {
               providers: [
                 BlocProvider(
                   create: (_) => ClockCubit(),
-                )
+                ),
+                  BlocProvider(
+                  create: (_) => AuthBloc(),
+                ),
               ],
               child: MaterialApp(
                 localizationsDelegates: [

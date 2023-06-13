@@ -3,11 +3,13 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:riyad/bottom_nav_bar/bottom_nav_bar.dart';
 import 'package:riyad/core/app_colors.dart';
 import 'package:riyad/core/app_images.dart';
+import 'package:riyad/modules/scan_auth/bloc/auth_bloc.dart';
 import 'package:riyad/modules/scan_auth/dailog_component.dart';
 
 class ScanAuth extends StatefulWidget {
@@ -18,7 +20,9 @@ class ScanAuth extends StatefulWidget {
 }
 
 class _ScanAuthState extends State<ScanAuth> {
+  late AuthBloc authBloc;
   Barcode? result;
+  int counter=0;
   QRViewController? controller;
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
   @override
@@ -29,44 +33,53 @@ class _ScanAuthState extends State<ScanAuth> {
     }
     controller!.resumeCamera();
   }
+
+  @override
+  void initState() {
+    authBloc = AuthBloc();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: <Widget>[
-          Expanded(flex: 4, child: _buildQrView(context)),
-          Expanded(
-            flex: 1,
-            child: FittedBox(
-              fit: BoxFit.contain,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  if (result != null)
-                    Text(
-                        'Barcode Type: ${describeEnum(result!.format)}   Data: ${result!.code}')
-                  else
-                  InkWell(
-                    onTap: (){
-                           Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (_) =>
-                                          const AppBottomNavigationBar()));
-                     
-                    },
-                    child:Container(
-                      height: 100,
-                      width: 100,
-                      child: SvgPicture.asset(AppImages.scanSvg),
-                    ) ,
-                  ),
-          
-                ],
+    return BlocListener<AuthBloc, AuthState>(
+      bloc: authBloc,
+      listener: (context, state) {
+        if (state is AuthLoadedState && counter==1) {
+           Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
+    AppBottomNavigationBar()), (Route<dynamic> route) => false);
+       
+        }
+      },
+      child: Scaffold(
+        body: Column(
+          children: <Widget>[
+            Expanded(flex: 4, child: _buildQrView(context)),
+              if (result != null)
+            Expanded(
+              flex: 1,
+              child: FittedBox(
+                fit: BoxFit.contain,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    Container(color: Colors.green,height: 20,width: MediaQuery.of(context).size.width,child: Center(child: Text("Ready to Login")),),
+                      InkWell(
+                        onTap: () {
+                       authBloc.add(LoginEvent(qrScan: result!.code!));
+                        },
+                        child: Container(
+                          height: 100,
+                          width: 100,
+                          child: SvgPicture.asset(AppImages.scanSvg),
+                        ),
+                      ),
+                  ],
+                ),
               ),
-            ),
-          )
-        ],
+            )
+          ],
+        ),
       ),
     );
   }
@@ -99,6 +112,7 @@ class _ScanAuthState extends State<ScanAuth> {
     controller.scannedDataStream.listen((scanData) {
       setState(() {
         result = scanData;
+        counter=1;
       });
     });
   }
