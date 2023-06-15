@@ -4,7 +4,7 @@ import 'package:flutter_translate/flutter_translate.dart';
 import 'package:riyad/core/app_colors.dart';
 import 'package:riyad/core/app_images.dart';
 import 'package:riyad/core/app_theme.dart';
-import 'package:riyad/modules/scan_auth/scan_auth.dart';
+import 'package:riyad/modules/scan_auth/screens/scan_auth.dart';
 import 'package:riyad/modules/settings/about_us.dart';
 import 'package:riyad/modules/settings/language.dart';
 

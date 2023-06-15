@@ -5,7 +5,7 @@ import 'package:riyad/core/app_colors.dart';
 import 'package:riyad/core/app_images.dart';
 import 'package:riyad/core/app_shared.dart';
 import 'package:riyad/modules/scan_auth/dailog_component.dart';
-import 'package:riyad/modules/scan_auth/scan_auth.dart';
+import 'package:riyad/modules/scan_auth/screens/scan_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -24,7 +24,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   goNext() async{
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    if(!preferences.containsKey("userToken")){
+    if(preferences.containsKey("userToken")){
      Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
     AppBottomNavigationBar()), (Route<dynamic> route) => false);
     }else{

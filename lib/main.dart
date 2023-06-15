@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,6 +8,7 @@ import 'package:flutter_translate/flutter_translate.dart';
 import 'package:riyad/app_observer.dart';
 import 'package:riyad/core/app_theme.dart';
 import 'package:riyad/localization/translate_preferences.dart';
+import 'package:riyad/modules/attendance/bloc/attendance_bloc.dart';
 import 'package:riyad/modules/home/bloc/clock_cubit.dart';
 import 'package:riyad/modules/scan_auth/bloc/auth_bloc.dart';
 import 'package:riyad/splash_screen.dart';
@@ -50,6 +52,9 @@ class App extends StatelessWidget {
                 ),
                   BlocProvider(
                   create: (_) => AuthBloc(),
+                ),
+                   BlocProvider(
+                  create: (_) => AttendanceBloc(),
                 ),
               ],
               child: MaterialApp(

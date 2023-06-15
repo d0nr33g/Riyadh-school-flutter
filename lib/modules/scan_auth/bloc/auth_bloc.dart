@@ -21,6 +21,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
              pref.setString("userToken",response.result!.accessToken!);
               pref.setString("userName","${response.result!.firstName!}${response.result!.lastName!}");
               pref.setString("userId",response.result!.sId!);
+              AppShared.setToken(response.result!.accessToken!);
               emit(AuthLoadedState());
           }
       } catch (e) {

@@ -7,6 +7,8 @@ import 'package:riyad/core/app_colors.dart';
 import 'package:riyad/core/app_images.dart';
 import 'package:riyad/core/app_theme.dart';
 import 'package:riyad/modules/home/bloc/clock_cubit.dart';
+import 'package:riyad/modules/home/clock_component.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -19,8 +21,10 @@ class _HomeScreenState extends State<HomeScreen> {
   bool checkin = false;
   bool checkout = false;
   bool getReady = false;
-  DateTime checkinTime = DateTime.now();
-  DateTime? checkOutTime;
+  // String checkinTime ="00:00";
+  // DateTime? checkOutTime;
+  String? userName;
+  String? userId;
   Future<void> fetchBiometricData(DateTime state) async {
     final localAuth = LocalAuthentication();
 
@@ -37,11 +41,9 @@ class _HomeScreenState extends State<HomeScreen> {
             setState(() {
               if (checkin == false) {
                 checkin = true;
-                checkinTime = state;
               } else if (checkout == false) {
-                checkout=true;
-                checkin=false;
-                checkOutTime = state;
+                checkout = true;
+                checkin = false;
               }
             });
             print('Fingerprint authentication succeeded');
@@ -63,7 +65,15 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    // _getCurrentPosition();
+    getUsetData();
+  }
+
+  getUsetData() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    setState(() {
+      userName = pref.getString("userName");
+      userId = pref.getString("userId");
+    });
   }
 
   @override
@@ -73,158 +83,139 @@ class _HomeScreenState extends State<HomeScreen> {
     // String formattedTime = DateFormat('hh:mm a').format(now);
     return Scaffold(
       body: Center(
-        child: BlocBuilder<ClockCubit, DateTime>(
-          builder: (context, state) {
-            return Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              crossAxisAlignment: CrossAxisAlignment.center,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Column(
               children: [
-                Column(
-                  children: [
-                    const CircleAvatar(
-                      radius: 30,
-                      backgroundImage: NetworkImage(
-                          "https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg"),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      "4545454",
-                      style: AppTheme.latoTheme.displayMedium,
-                    ),
-                    const Text("ID Number"),
-                  ],
-                ),
-                Text("${DateFormat('hh:mm a').format(state)}",
-                    textAlign: TextAlign.center,
-                    style: AppTheme.latoTheme.displayLarge!
-                        .copyWith(fontSize: 51)),
-                Text(
-                  "${DateFormat('EEEE, MMM d').format(state)}",
-                  textAlign: TextAlign.center,
-                  style: AppTheme.latoTheme.displayLarge!
-                      .copyWith(fontSize: 25, color: AppColors.textColor),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Column(
-                      children: [
-                        InkWell(
-                            onTap: () {
-                              fetchBiometricData(state);
-                            },
-                            child: checkin
-                                ? SvgPicture.asset(AppImages.checkoutSvg)
-                                : SvgPicture.asset(AppImages.checkineSvg)),
-                      ],
-                    ),
-                    Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        checkin == false
-                            ? Stack(
-                                children: [
-                                  SvgPicture.asset(
-                                      AppImages.notificationCircleSvg),
-                                  Positioned(
-                                      bottom: 20,
-                                      right: 18,
-                                      child: Text(
-                                        "27",
-                                        style: AppTheme.latoTheme.displayMedium!
-                                            .copyWith(
-                                                color: AppColors.whiteColor,
-                                                fontWeight: FontWeight.bold),
-                                      )),
-                                ],
-                              )
-                            : Container(
-                                width: MediaQuery.of(context).size.width / 5,
-                              ),
-                      ],
-                    )
-                  ],
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                const Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(Icons.location_on),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Text("Location : You Are Not In Office Reach"),
-                  ],
-                ),
-                const SizedBox(
-                  height: 30,
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: Column(
-                        children: [
-                          SvgPicture.asset(AppImages.timeInSvg),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Text("${DateFormat('hh:mm').format(checkinTime)}",
-                              style: AppTheme.latoTheme.displayLarge!),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          const Text("Checkin")
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      child: Column(
-                        children: [
-                          SvgPicture.asset(AppImages.timeOutSvg),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Text(checkOutTime!=null?"${DateFormat('hh:mm').format(checkOutTime!)}":"00:00",
-                              style: AppTheme.latoTheme.displayLarge!),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          const Text("Checkout")
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      child: Column(
-                        children: [
-                          SvgPicture.asset(AppImages.timertSvg),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Text(checkOutTime!=null?
-                              "${checkOutTime!.difference(checkinTime).inHours}:${checkOutTime!.difference(checkinTime).inMinutes}":"00:00",
-                              style: AppTheme.latoTheme.displayLarge!),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          const Text("working hr's")
-                        ],
-                      ),
-                    ),
-                  ],
+                const CircleAvatar(
+                  radius: 30,
+                  backgroundImage: NetworkImage(
+                      "https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg"),
                 ),
                 SizedBox(
                   height: 10,
                 ),
+                if (userId != null)
+                  Text(
+                    "${userId}",
+                    style: AppTheme.latoTheme.displayMedium,
+                  ),
+                const Text("ID Number"),
               ],
-            );
-          },
+            ),
+            ClockComponent(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Column(
+                  children: [
+                    InkWell(
+                        onTap: () {},
+                        child: checkin
+                            ? SvgPicture.asset(AppImages.checkoutSvg)
+                            : SvgPicture.asset(AppImages.checkineSvg)),
+                  ],
+                ),
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    checkin == false
+                        ? Stack(
+                            children: [
+                              SvgPicture.asset(AppImages.notificationCircleSvg),
+                              Positioned(
+                                  bottom: 20,
+                                  right: 18,
+                                  child: Text(
+                                    "27",
+                                    style: AppTheme.latoTheme.displayMedium!
+                                        .copyWith(
+                                            color: AppColors.whiteColor,
+                                            fontWeight: FontWeight.bold),
+                                  )),
+                            ],
+                          )
+                        : Container(
+                            width: MediaQuery.of(context).size.width / 5,
+                          ),
+                  ],
+                )
+              ],
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            const Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(Icons.location_on),
+                SizedBox(
+                  width: 10,
+                ),
+                Text("Location : You Are Not In Office Reach"),
+              ],
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+            Row(
+              children: [
+                Expanded(
+                  child: Column(
+                    children: [
+                      SvgPicture.asset(AppImages.timeInSvg),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text("00:00", style: AppTheme.latoTheme.displayLarge!),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      const Text("Checkin")
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: Column(
+                    children: [
+                      SvgPicture.asset(AppImages.timeOutSvg),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text("00:00", style: AppTheme.latoTheme.displayLarge!),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      const Text("Checkout")
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: Column(
+                    children: [
+                      SvgPicture.asset(AppImages.timertSvg),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text("00:00", style: AppTheme.latoTheme.displayLarge!),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      const Text("working hr's")
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 10,
+            ),
+          ],
         ),
       ),
     );
