@@ -1,5 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_translate/flutter_translate.dart';
 import 'package:riyad/core/app_colors.dart';
 import 'package:riyad/core/app_theme.dart';
 
@@ -33,7 +33,8 @@ Future<void> showLanguageDialog(context) async {
                               setState(() {
                                 isEnglish = true;
                                   Navigator.pop(context);
-                                   changeLocale(context, "en");
+                                  // changeLocale(context, "en");
+                                   context.setLocale(Locale('en', 'US'));
                               });
                             },
                             child: Container(
@@ -85,7 +86,9 @@ Future<void> showLanguageDialog(context) async {
                               setState(() {
                                 isEnglish = false;
                                 Navigator.pop(context);
-                                changeLocale(context, "ar");
+                               // changeLocale(context, "ar");
+                               context.setLocale(Locale('ar', 'EG'));
+
                               });
                             },
                             child: Container(

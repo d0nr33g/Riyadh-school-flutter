@@ -1,6 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:flutter_translate/flutter_translate.dart';
 import 'package:riyad/core/app_colors.dart';
 import 'package:riyad/core/app_images.dart';
 import 'package:riyad/core/app_theme.dart';
@@ -57,7 +57,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
               ListTile(
                 onTap: () {showLanguageDialog(context);},
-                title: Text(translate("language"),
+                title: Text("language".tr(),
                     style: AppTheme.latoTheme.bodyMedium!
                         .copyWith(fontWeight: FontWeight.w500)),
                 leading: SvgPicture.asset(AppImages.translateSvg),

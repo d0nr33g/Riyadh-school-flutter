@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flutter_translate/flutter_translate.dart';
 import 'package:riyad/core/app_colors.dart';
 import 'package:riyad/core/app_images.dart';
 import 'package:riyad/core/app_theme.dart';
@@ -24,7 +23,7 @@ class AboutUS extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(24.0),
                 child: Text(
-                  translate("aboutUS"),
+                 "aboutUS",
                   style: AppTheme.latoTheme.bodyMedium!
                       .copyWith(color: AppColors.whiteColor, fontSize: 15),
                 ),
