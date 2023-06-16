@@ -6,6 +6,7 @@ import 'package:riyad/core/app_colors.dart';
 import 'package:riyad/core/app_images.dart';
 import 'package:riyad/core/app_theme.dart';
 import 'package:riyad/modules/attendance/bloc/attendance_bloc.dart';
+import 'package:riyad/modules/attendance/bloc/bloc/daily_attend_bloc.dart';
 
 class AttendanceScreen extends StatefulWidget {
   const AttendanceScreen({super.key});
@@ -16,10 +17,13 @@ class AttendanceScreen extends StatefulWidget {
 
 class _AttendanceScreenState extends State<AttendanceScreen> {
   late AttendanceBloc attendanceBloc;
+  late DailyAttendBloc dailyAttendBloc;
   @override
   void initState() {
     attendanceBloc = AttendanceBloc();
+    dailyAttendBloc=DailyAttendBloc();
     attendanceBloc.add(GetWeeklyAttendance());
+    dailyAttendBloc.add(GetDaylyAttendance());
     super.initState();
   }
 
@@ -45,73 +49,84 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
           const SizedBox(
             height: 40,
           ),
-          Row(
-            children: [
-              Expanded(
-                child: Column(
-                  children: [
-                    Icon(
-                      Icons.calendar_month_outlined,
-                      size: 40,
-                      color: AppColors.primaryColor,
+          BlocBuilder<DailyAttendBloc, DailyAttendState>(
+              bloc: dailyAttendBloc,
+            builder: (context, state) {
+              if(state is DayAttendanceLoaded){
+          return Row(
+                children: [
+                  Expanded(
+                    child: Column(
+                      children: [
+                        Icon(
+                          Icons.calendar_month_outlined,
+                          size: 40,
+                          color: AppColors.primaryColor,
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Text("Days", style: AppTheme.latoTheme.displayLarge!),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        const Text("per Week")
+                      ],
                     ),
-                    const SizedBox(
-                      height: 10,
+                  ),
+                  Expanded(
+                    child: Column(
+                      children: [
+                        SvgPicture.asset(AppImages.timeInSvg),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        state.attendDay.checkIn!=null?
+                        Text( "${DateFormat('hh:mm').format(DateTime.parse(state.attendDay.checkIn!).toLocal())}", style: AppTheme.latoTheme.displayLarge!):Text("--:--"),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        const Text("Checkin")
+                      ],
                     ),
-                    Text("Days", style: AppTheme.latoTheme.displayLarge!),
-                    const SizedBox(
-                      height: 10,
+                  ),
+                  Expanded(
+                    child: Column(
+                      children: [
+                        SvgPicture.asset(AppImages.timeOutSvg),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Text("--:--", style: AppTheme.latoTheme.displayLarge!),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        const Text("Checkout")
+                      ],
                     ),
-                    const Text("per Week")
-                  ],
-                ),
-              ),
-              Expanded(
-                child: Column(
-                  children: [
-                    SvgPicture.asset(AppImages.timeInSvg),
-                    const SizedBox(
-                      height: 10,
+                  ),
+                  Expanded(
+                    child: Column(
+                      children: [
+                        SvgPicture.asset(AppImages.timertSvg),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Text("${state.attendDay.workingHours}", style: AppTheme.latoTheme.displayLarge!),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        const Text("working hr's")
+                      ],
                     ),
-                    Text("09:10", style: AppTheme.latoTheme.displayLarge!),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    const Text("Checkin")
-                  ],
-                ),
-              ),
-              Expanded(
-                child: Column(
-                  children: [
-                    SvgPicture.asset(AppImages.timeOutSvg),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Text("--:--", style: AppTheme.latoTheme.displayLarge!),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    const Text("Checkout")
-                  ],
-                ),
-              ),
-              Expanded(
-                child: Column(
-                  children: [
-                    SvgPicture.asset(AppImages.timertSvg),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Text("--:--", style: AppTheme.latoTheme.displayLarge!),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    const Text("working hr's")
-                  ],
-                ),
-              ),
-            ],
+                  ),
+                ],
+              );
+              }else{
+                return Container();
+              }
+    
+            },
           ),
           const SizedBox(
             height: 30,
@@ -120,10 +135,11 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
               child: BlocBuilder<AttendanceBloc, AttendanceState>(
             bloc: attendanceBloc,
             builder: (context, state) {
-              print("kokoko ${state}");
               if (state is AttendanceLoading) {
                 return Center(
-                  child: CircularProgressIndicator(color: AppColors.primaryColor,),
+                  child: CircularProgressIndicator(
+                    color: AppColors.primaryColor,
+                  ),
                 );
               }
               if (state is AttendanceLoaded) {

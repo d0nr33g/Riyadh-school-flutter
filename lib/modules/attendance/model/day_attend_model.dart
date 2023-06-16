@@ -1,4 +1,4 @@
-class AttendanceModel {
+class DayAttendaceModel {
   String? sId;
   String? employee;
   String? checkIn;
@@ -7,11 +7,10 @@ class AttendanceModel {
   String? createdAt;
   String? updatedAt;
   int? iV;
-  String? checkOut;
-  int? workingHoursMileseconds;
-  String? workingHours;
+  dynamic? workingHoursMileseconds;
+  dynamic? workingHours;
 
-  AttendanceModel(
+  DayAttendaceModel(
       {this.sId,
       this.employee,
       this.checkIn,
@@ -20,11 +19,10 @@ class AttendanceModel {
       this.createdAt,
       this.updatedAt,
       this.iV,
-      this.checkOut,
       this.workingHoursMileseconds,
       this.workingHours});
 
-  AttendanceModel.fromJson(Map<String, dynamic> json) {
+  DayAttendaceModel.fromJson(Map<String, dynamic> json) {
     sId = json['_id'];
     employee = json['employee'];
     checkIn = json['checkIn'];
@@ -33,8 +31,7 @@ class AttendanceModel {
     createdAt = json['createdAt'];
     updatedAt = json['updatedAt'];
     iV = json['__v'];
-    checkOut = json['checkOut'];
-    workingHoursMileseconds = json['workingHoursMileseconds']??0;
+    workingHoursMileseconds = json['workingHoursMileseconds']==null?0:json['workingHoursMileseconds'];
     workingHours = json['workingHours'];
   }
 

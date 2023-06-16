@@ -1,41 +1,33 @@
-class AttendanceModel {
-  String? sId;
+class ChickInModel {
   String? employee;
   String? checkIn;
   bool? isCheckedInLate;
   bool? isCheckedOutEarly;
+  String? sId;
   String? createdAt;
   String? updatedAt;
   int? iV;
-  String? checkOut;
-  int? workingHoursMileseconds;
-  String? workingHours;
 
-  AttendanceModel(
-      {this.sId,
-      this.employee,
+  ChickInModel(
+      {this.employee,
       this.checkIn,
       this.isCheckedInLate,
       this.isCheckedOutEarly,
+      this.sId,
       this.createdAt,
       this.updatedAt,
-      this.iV,
-      this.checkOut,
-      this.workingHoursMileseconds,
-      this.workingHours});
+      this.iV});
 
-  AttendanceModel.fromJson(Map<String, dynamic> json) {
-    sId = json['_id'];
+  ChickInModel.fromJson(Map<String, dynamic> json) {
     employee = json['employee'];
     checkIn = json['checkIn'];
     isCheckedInLate = json['isCheckedInLate'];
     isCheckedOutEarly = json['isCheckedOutEarly'];
+    sId = json['_id'];
     createdAt = json['createdAt'];
     updatedAt = json['updatedAt'];
     iV = json['__v'];
-    checkOut = json['checkOut'];
-    workingHoursMileseconds = json['workingHoursMileseconds']??0;
-    workingHours = json['workingHours'];
   }
+
 
 }

@@ -1,6 +1,5 @@
 part of 'attendance_bloc.dart';
 
-@immutable
 abstract class AttendanceState {}
 
 class AttendanceInitial extends AttendanceState {}
@@ -18,3 +17,5 @@ class AttendanceFailed extends AttendanceState {
   String errorMessage;
   AttendanceFailed({required this.errorMessage});
 }
+
+////////////////////////////////////////////

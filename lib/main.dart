@@ -9,6 +9,7 @@ import 'package:riyad/app_observer.dart';
 import 'package:riyad/core/app_theme.dart';
 import 'package:riyad/localization/translate_preferences.dart';
 import 'package:riyad/modules/attendance/bloc/attendance_bloc.dart';
+import 'package:riyad/modules/attendance/bloc/bloc/daily_attend_bloc.dart';
 import 'package:riyad/modules/home/bloc/clock_cubit.dart';
 import 'package:riyad/modules/scan_auth/bloc/auth_bloc.dart';
 import 'package:riyad/splash_screen.dart';
@@ -54,6 +55,9 @@ class App extends StatelessWidget {
                 ),
                    BlocProvider(
                   create: (_) => AttendanceBloc(),
+                ),
+                   BlocProvider(
+                  create: (_) => DailyAttendBloc(),
                 ),
               ],
               child: MaterialApp(
