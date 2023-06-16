@@ -6,6 +6,7 @@ import 'package:local_auth/local_auth.dart';
 import 'package:riyad/core/app_colors.dart';
 import 'package:riyad/core/app_images.dart';
 import 'package:riyad/core/app_theme.dart';
+import 'package:riyad/modules/attendance/bloc/bloc/daily_attend_bloc.dart';
 import 'package:riyad/modules/home/bloc/clock_cubit.dart';
 import 'package:riyad/modules/home/clock_component.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -21,6 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
   bool checkin = false;
   bool checkout = false;
   bool getReady = false;
+  late DailyAttendBloc dailyAttendBloc;
   // String checkinTime ="00:00";
   // DateTime? checkOutTime;
   String? userName;
@@ -65,6 +67,8 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    dailyAttendBloc = DailyAttendBloc();
+    dailyAttendBloc.add(GetDaylyAttendance());
     getUsetData();
   }
 
@@ -163,54 +167,74 @@ class _HomeScreenState extends State<HomeScreen> {
             const SizedBox(
               height: 30,
             ),
-            Row(
-              children: [
-                Expanded(
-                  child: Column(
+            BlocBuilder<DailyAttendBloc, DailyAttendState>(
+              bloc: dailyAttendBloc,
+              builder: (context, state) {
+                if (state is DayAttendanceLoaded) {
+                  return Row(
                     children: [
-                      SvgPicture.asset(AppImages.timeInSvg),
-                      SizedBox(
-                        height: 10,
+                      Expanded(
+                        child: Column(
+                          children: [
+                            SvgPicture.asset(AppImages.timeInSvg),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            state.attendDay.checkIn != null
+                                ? Text(
+                                    "${DateFormat('hh:mm').format(DateTime.parse(state.attendDay.checkIn!).toLocal())}",
+                                    style: AppTheme.latoTheme.displayLarge!)
+                                : Text("--:--"),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            const Text("Checkin")
+                          ],
+                        ),
                       ),
-                      Text("00:00", style: AppTheme.latoTheme.displayLarge!),
-                      SizedBox(
-                        height: 10,
+                      Expanded(
+                        child: Column(
+                          children: [
+                            SvgPicture.asset(AppImages.timeOutSvg),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Text("00:00",
+                                style: AppTheme.latoTheme.displayLarge!),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            const Text("Checkout")
+                          ],
+                        ),
                       ),
-                      const Text("Checkin")
+                      Expanded(
+                        child: Column(
+                          children: [
+                            SvgPicture.asset(AppImages.timertSvg),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Text("${state.attendDay.workingHours}",
+                                style: AppTheme.latoTheme.displayLarge!),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            const Text("working hr's")
+                          ],
+                        ),
+                      ),
                     ],
-                  ),
-                ),
-                Expanded(
-                  child: Column(
-                    children: [
-                      SvgPicture.asset(AppImages.timeOutSvg),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text("00:00", style: AppTheme.latoTheme.displayLarge!),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      const Text("Checkout")
-                    ],
-                  ),
-                ),
-                Expanded(
-                  child: Column(
-                    children: [
-                      SvgPicture.asset(AppImages.timertSvg),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text("00:00", style: AppTheme.latoTheme.displayLarge!),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      const Text("working hr's")
-                    ],
-                  ),
-                ),
-              ],
+                  );
+                } else {
+                  return Container(
+                    child: Center(
+                      child: CircularProgressIndicator(
+                          color: AppColors.primaryColor),
+                    ),
+                  );
+                }
+              },
             ),
             SizedBox(
               height: 10,

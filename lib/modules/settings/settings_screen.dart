@@ -7,6 +7,7 @@ import 'package:riyad/core/app_theme.dart';
 import 'package:riyad/modules/scan_auth/screens/scan_auth.dart';
 import 'package:riyad/modules/settings/about_us.dart';
 import 'package:riyad/modules/settings/language.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -16,6 +17,15 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
+  logOut() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.clear();
+         Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (_) => const ScanAuth()),
+          (route) => false);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,7 +66,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 ],
               ),
               ListTile(
-                onTap: () {showLanguageDialog(context);},
+                onTap: () {
+                  showLanguageDialog(context);
+                },
                 title: Text("language".tr(),
                     style: AppTheme.latoTheme.bodyMedium!
                         .copyWith(fontWeight: FontWeight.w500)),
@@ -71,7 +83,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
               ListTile(
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (_)=>AboutUS()));
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (_) => AboutUS()));
                 },
                 title: Text("ABOUT US",
                     style: AppTheme.latoTheme.bodyMedium!
@@ -80,10 +93,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
               ListTile(
                 onTap: () {
-                  Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(builder: (_) => const ScanAuth()),
-                      (route) => false);
+                logOut();
                 },
                 title: Text("LOGOUT",
                     style: AppTheme.latoTheme.bodyMedium!
