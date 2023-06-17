@@ -4,13 +4,14 @@ part of 'home_bloc.dart';
 abstract class HomeState {}
 
 class HomeInitial extends HomeState {}
-class CheckInLoading extends HomeBloc{
+class CheckInLoading extends HomeState{
   CheckInLoading();
 }
-class CheckInLoaded extends HomeBloc{
-  CheckInLoaded();
+class CheckInLoaded extends HomeState{
+  ChickInModel chickInModel;
+  CheckInLoaded({required this.chickInModel});
 }
-class CheckInfailed extends HomeBloc{
+class CheckInfailed extends HomeState{
   String errorMessage;
   CheckInfailed({required this.errorMessage});
 }

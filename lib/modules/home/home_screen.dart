@@ -8,7 +8,9 @@ import 'package:riyad/core/app_images.dart';
 import 'package:riyad/core/app_theme.dart';
 import 'package:riyad/modules/attendance/bloc/bloc/daily_attend_bloc.dart';
 import 'package:riyad/modules/home/bloc/clock_cubit.dart';
-import 'package:riyad/modules/home/clock_component.dart';
+import 'package:riyad/modules/home/components/checkIn_component.dart';
+import 'package:riyad/modules/home/components/checkOut_component.dart';
+import 'package:riyad/modules/home/components/clock_component.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -114,15 +116,9 @@ class _HomeScreenState extends State<HomeScreen> {
               mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Column(
-                  children: [
-                    InkWell(
-                        onTap: () {},
-                        child: checkin
-                            ? SvgPicture.asset(AppImages.checkoutSvg)
-                            : SvgPicture.asset(AppImages.checkineSvg)),
-                  ],
-                ),
+                checkin==false?
+                CheckInComponent(dailyAttendBloc):
+                CheckOutComponent(dailyAttendBloc),
                 Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.end,
