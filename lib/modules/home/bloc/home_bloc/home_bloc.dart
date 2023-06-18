@@ -18,11 +18,12 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           if (response.success) {
             emit(CheckInLoaded(chickInModel: response.result!));
           }
+     
         else if (response.success==false) {
-          print("kookoo ${ response.message}");
             emit(CheckInfailed(errorMessage: response.message));
           }
         } catch (e) {
+          
           emit(CheckInfailed(errorMessage: e.toString()));
         }
       },

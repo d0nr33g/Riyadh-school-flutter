@@ -15,11 +15,13 @@ import 'package:riyad/modules/home/bloc/clock_cubit.dart';
 import 'package:riyad/modules/home/bloc/home_bloc/home_bloc.dart';
 import 'package:riyad/modules/scan_auth/bloc/auth_bloc.dart';
 import 'package:riyad/splash_screen.dart';
+import 'package:timezone/data/latest.dart' as tz;
 
  main() async {
   debugPrint("############ welcome in dev ############");
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
+   tz.initializeTimeZones();
   SystemChrome.setPreferredOrientations(<DeviceOrientation>[
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,

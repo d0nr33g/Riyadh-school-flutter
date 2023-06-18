@@ -21,50 +21,10 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  bool checkin = false;
-  bool checkout = false;
-  bool getReady = false;
   late DailyAttendBloc dailyAttendBloc;
-  // String checkinTime ="00:00";
-  // DateTime? checkOutTime;
   String? userName;
   String? userId;
-  Future<void> fetchBiometricData(DateTime state) async {
-    final localAuth = LocalAuthentication();
-
-    try {
-      bool canCheckBiometrics = await localAuth.canCheckBiometrics;
-      if (canCheckBiometrics) {
-        bool isFingerprintAvailable = await localAuth.canCheckBiometrics;
-
-        if (isFingerprintAvailable) {
-          bool didAuthenticate = await localAuth.authenticate(
-            localizedReason: 'Scan your fingerprint to authenticate',
-          );
-          if (didAuthenticate) {
-            setState(() {
-              if (checkin == false) {
-                checkin = true;
-              } else if (checkout == false) {
-                checkout = true;
-                checkin = false;
-              }
-            });
-            print('Fingerprint authentication succeeded');
-          } else {
-            print('Fingerprint authentication failed');
-          }
-        } else {
-          print('Fingerprint authentication is not available');
-        }
-      } else {
-        print('Biometric authentication is not available');
-      }
-    } catch (e) {
-      print('Error: $e');
-    }
-  }
-
+ 
   @override
   void initState() {
     // TODO: implement initState
@@ -80,13 +40,11 @@ class _HomeScreenState extends State<HomeScreen> {
       userName = pref.getString("userName");
       userId = pref.getString("userId");
     });
+    print("dataUpdated");
   }
 
   @override
   Widget build(BuildContext context) {
-    // DateTime now = DateTime.now();
-    // String formattedDate = DateFormat('EEEE, MMM d').format(now);
-    // String formattedTime = DateFormat('hh:mm a').format(now);
     return Scaffold(
       body: Center(
         child: Column(
@@ -116,16 +74,17 @@ class _HomeScreenState extends State<HomeScreen> {
               mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                checkin==false?
-                CheckInComponent(dailyAttendBloc):
-                CheckOutComponent(dailyAttendBloc),
+               // isCheckIn==false?
+                CheckInComponent(dailyAttendBloc),
+           //   CheckOutComponent(dailyAttendBloc),
                 Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.end,
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    checkin == false
-                        ? Stack(
+                    // isCheckIn == false
+                    //     ? 
+                        Stack(
                             children: [
                               SvgPicture.asset(AppImages.notificationCircleSvg),
                               Positioned(
@@ -140,9 +99,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                   )),
                             ],
                           )
-                        : Container(
-                            width: MediaQuery.of(context).size.width / 5,
-                          ),
+                        // : Container(
+                        //     width: MediaQuery.of(context).size.width / 5,
+                        //   ),
                   ],
                 )
               ],
@@ -167,6 +126,7 @@ class _HomeScreenState extends State<HomeScreen> {
               bloc: dailyAttendBloc,
               builder: (context, state) {
                 if (state is DayAttendanceLoaded) {
+                   
                   return Row(
                     children: [
                       Expanded(
@@ -195,8 +155,11 @@ class _HomeScreenState extends State<HomeScreen> {
                             SizedBox(
                               height: 10,
                             ),
-                            Text("00:00",
-                                style: AppTheme.latoTheme.displayLarge!),
+                                 state.attendDay.checkOut!.isNotEmpty
+                                ? Text(
+                                    "${DateFormat('hh:mm').format(DateTime.parse(state.attendDay.checkOut!).toLocal())}",
+                                    style: AppTheme.latoTheme.displayLarge!)
+                                : Text("--:--"),
                             SizedBox(
                               height: 10,
                             ),

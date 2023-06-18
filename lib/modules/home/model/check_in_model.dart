@@ -29,5 +29,4 @@ class ChickInModel {
     iV = json['__v'];
   }
 
-
 }

@@ -2,6 +2,7 @@ class DayAttendaceModel {
   String? sId;
   String? employee;
   String? checkIn;
+  String? checkOut;
   bool? isCheckedInLate;
   bool? isCheckedOutEarly;
   String? createdAt;
@@ -14,6 +15,7 @@ class DayAttendaceModel {
       {this.sId,
       this.employee,
       this.checkIn,
+      this.checkOut,
       this.isCheckedInLate,
       this.isCheckedOutEarly,
       this.createdAt,
@@ -26,6 +28,7 @@ class DayAttendaceModel {
     sId = json['_id'];
     employee = json['employee'];
     checkIn = json['checkIn'];
+    checkOut = json['checkOut']??"";
     isCheckedInLate = json['isCheckedInLate'];
     isCheckedOutEarly = json['isCheckedOutEarly'];
     createdAt = json['createdAt'];

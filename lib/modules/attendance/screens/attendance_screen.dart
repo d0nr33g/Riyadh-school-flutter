@@ -97,7 +97,7 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
                         const SizedBox(
                           height: 10,
                         ),
-                        Text("--:--", style: AppTheme.latoTheme.displayLarge!),
+                        Text(state.attendDay.checkOut!.isNotEmpty?"${DateFormat('hh:mm').format(DateTime.parse(state.attendDay.checkOut!).toLocal())}": "--:--", style: AppTheme.latoTheme.displayLarge!),
                         const SizedBox(
                           height: 10,
                         ),

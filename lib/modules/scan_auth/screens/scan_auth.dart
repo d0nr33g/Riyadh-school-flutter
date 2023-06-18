@@ -21,7 +21,7 @@ class ScanAuth extends StatefulWidget {
 class _ScanAuthState extends State<ScanAuth> {
   late AuthBloc authBloc;
   Barcode? result;
-  int counter=0;
+  int counter = 0;
   QRViewController? controller;
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
   @override
@@ -44,28 +44,28 @@ class _ScanAuthState extends State<ScanAuth> {
     return BlocListener<AuthBloc, AuthState>(
       bloc: authBloc,
       listener: (context, state) {
-        if (state is AuthLoadedState &&  result !=null) {
-          counter=2;
-           Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
-    AppBottomNavigationBar()), (Route<dynamic> route) => false);
-       
+        if (state is AuthLoadedState && result != null) {
+          counter = 2;
+          Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(builder: (context) => AppBottomNavigationBar()),
+              (Route<dynamic> route) => false);
         }
       },
       child: Scaffold(
         body: Column(
           children: <Widget>[
             Expanded(flex: 4, child: _buildQrView(context)),
-              if (result != null)
-            Expanded(
-              flex: 1,
-              child: FittedBox(
-                fit: BoxFit.contain,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
+            if (result != null)
+              Expanded(
+                flex: 1,
+                child: FittedBox(
+                  fit: BoxFit.contain,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
                       InkWell(
                         onTap: () {
-                       authBloc.add(LoginEvent(qrScan: result!.code!));
+                          authBloc.add(LoginEvent(qrScan: result!.code!));
                         },
                         child: Container(
                           height: 100,
@@ -73,10 +73,10 @@ class _ScanAuthState extends State<ScanAuth> {
                           child: SvgPicture.asset(AppImages.scanSvg),
                         ),
                       ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-            )
+              )
           ],
         ),
       ),
@@ -111,7 +111,7 @@ class _ScanAuthState extends State<ScanAuth> {
     controller.scannedDataStream.listen((scanData) {
       setState(() {
         result = scanData;
-        counter=2;
+        counter = 2;
       });
     });
   }
