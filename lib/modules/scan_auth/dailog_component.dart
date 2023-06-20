@@ -7,6 +7,7 @@ import 'package:riyad/core/app_colors.dart';
 import 'package:riyad/core/app_images.dart';
 import 'package:riyad/core/app_theme.dart';
 import 'package:riyad/modules/scan_auth/screens/scan_auth.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> showLocationDialog(context) async {
   return showDialog<void>(
@@ -341,6 +342,7 @@ getCameraPermission(context) async {
 }
 
 getFingerprintPermission(context) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
 
   final LocalAuthentication auth = LocalAuthentication();
 
@@ -348,6 +350,7 @@ getFingerprintPermission(context) async {
       await auth.getAvailableBiometrics();
 
   if (availableBiometrics.isNotEmpty) {
+    preferences.setBool("notFirstTime",true);
     Navigator.pop(context);
         Navigator.pushAndRemoveUntil(
           context,

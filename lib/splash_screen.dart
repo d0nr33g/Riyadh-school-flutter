@@ -27,10 +27,14 @@ class _SplashScreenState extends State<SplashScreen> {
     if(preferences.containsKey("userToken")){
      Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
     AppBottomNavigationBar()), (Route<dynamic> route) => false);
+    }else if(preferences.containsKey("notFirstTime")){
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (_) => const ScanAuth()),
+          (route) => false);
     }else{
-    Future.delayed(const Duration(seconds: 3), () {
+        Future.delayed(const Duration(seconds: 3), () {
         showLocationDialog(context);
-  
     });
     }
   }

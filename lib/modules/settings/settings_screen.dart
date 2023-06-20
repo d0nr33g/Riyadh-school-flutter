@@ -20,6 +20,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   logOut() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     preferences.clear();
+     preferences.setBool("notFirstTime",true);
          Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(builder: (_) => const ScanAuth()),
