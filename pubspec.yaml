@@ -52,6 +52,7 @@ dependencies:
   easy_localization: ^3.0.2
   flutter_local_notifications: ^14.1.1
   timezone: ^0.9.2
+  chucker_flutter: ^1.5.2
 
 dev_dependencies:
   flutter_test:

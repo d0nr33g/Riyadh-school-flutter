@@ -1,3 +1,4 @@
+import 'package:chucker_flutter/chucker_flutter.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -77,6 +78,7 @@ class App extends StatelessWidget {
                 debugShowCheckedModeBanner: false,
                 theme: AppTheme.light(),
                 home: const SplashScreen(),
+                 navigatorObservers: [ChuckerFlutter.navigatorObserver],
               ),
             );
           }

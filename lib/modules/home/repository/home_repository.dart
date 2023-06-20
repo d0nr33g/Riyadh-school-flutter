@@ -10,6 +10,7 @@ class HomeRepository {
     final Response?  response = await ApiService.postApi(
         ApiPaths.checkInPath,
         isAuth: true);
+         print("kokoko2 ${response!.data}");
       return GenericResponse(fromJson: ChickInModel.fromJson,json: response!.data,isList: false);
   }
     static Future<GenericResponse<ChickOutModel>> checkout() async {

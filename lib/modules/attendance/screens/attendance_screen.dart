@@ -216,8 +216,11 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
                                               style: AppTheme
                                                   .latoTheme.displayLarge!
                                                   .copyWith(
-                                                      color: AppColors
-                                                          .primaryColor))
+                                                      color: data
+                                                              .isCheckedOutEarly!
+                                                          ? AppColors.redColor
+                                                          : AppColors
+                                                              .primaryColor))
                                           : Text("00:00",
                                               style: AppTheme
                                                   .latoTheme.displayLarge!
@@ -227,7 +230,9 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
                                       const SizedBox(
                                         width: 5,
                                       ),
-                                      SvgPicture.asset(AppImages.correctSvg),
+                                      SvgPicture.asset(data.isCheckedOutEarly!
+                                          ? AppImages.arrowDownSvg
+                                          : AppImages.correctSvg),
                                     ],
                                   ),
                                 ],

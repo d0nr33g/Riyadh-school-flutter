@@ -24,7 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
   late DailyAttendBloc dailyAttendBloc;
   String? userName;
   String? userId;
- 
+
   @override
   void initState() {
     // TODO: implement initState
@@ -70,133 +70,141 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
             ClockComponent(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-               // isCheckIn==false?
-                CheckInComponent(dailyAttendBloc),
-           //   CheckOutComponent(dailyAttendBloc),
-                Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    // isCheckIn == false
-                    //     ? 
-                        Stack(
-                            children: [
-                              SvgPicture.asset(AppImages.notificationCircleSvg),
-                              Positioned(
-                                  bottom: 20,
-                                  right: 18,
-                                  child: Text(
-                                    "27",
-                                    style: AppTheme.latoTheme.displayMedium!
-                                        .copyWith(
-                                            color: AppColors.whiteColor,
-                                            fontWeight: FontWeight.bold),
-                                  )),
-                            ],
-                          )
-                        // : Container(
-                        //     width: MediaQuery.of(context).size.width / 5,
-                        //   ),
-                  ],
-                )
-              ],
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(Icons.location_on),
-                SizedBox(
-                  width: 10,
-                ),
-                Text("Location : You Are Not In Office Reach"),
-              ],
-            ),
-            const SizedBox(
-              height: 30,
-            ),
             BlocBuilder<DailyAttendBloc, DailyAttendState>(
               bloc: dailyAttendBloc,
               builder: (context, state) {
-                if (state is DayAttendanceLoaded) {
-                   
-                  return Row(
+                if (state is DayAttendanceLoading) {
+                  return Center(
+                    child: CircularProgressIndicator(
+                        color: AppColors.primaryColor),
+                  );
+                } else if (state is DayAttendanceLoaded) {
+                  return Column(
                     children: [
-                      Expanded(
-                        child: Column(
-                          children: [
-                            SvgPicture.asset(AppImages.timeInSvg),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            state.attendDay.checkIn != null
-                                ? Text(
-                                    "${DateFormat('hh:mm').format(DateTime.parse(state.attendDay.checkIn!).toLocal())}",
-                                    style: AppTheme.latoTheme.displayLarge!)
-                                : Text("--:--"),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            const Text("Checkin")
-                          ],
-                        ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          // isCheckIn==false?
+                          state.attendDay.lastStatus == "CHECK_IN"
+                              ? CheckOutComponent(dailyAttendBloc)
+                              : CheckInComponent(dailyAttendBloc),
+                          Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              // isCheckIn == false
+                              //     ?
+                              Stack(
+                                children: [
+                                  SvgPicture.asset(
+                                      AppImages.notificationCircleSvg),
+                                  Positioned(
+                                      bottom: 20,
+                                      right: 18,
+                                      child: Text(
+                                        "27",
+                                        style: AppTheme.latoTheme.displayMedium!
+                                            .copyWith(
+                                                color: AppColors.whiteColor,
+                                                fontWeight: FontWeight.bold),
+                                      )),
+                                ],
+                              )
+                              // : Container(
+                              //     width: MediaQuery.of(context).size.width / 5,
+                              //   ),
+                            ],
+                          )
+                        ],
                       ),
-                      Expanded(
-                        child: Column(
-                          children: [
-                            SvgPicture.asset(AppImages.timeOutSvg),
-                            SizedBox(
-                              height: 10,
-                            ),
-                                 state.attendDay.checkOut!.isNotEmpty
-                                ? Text(
-                                    "${DateFormat('hh:mm').format(DateTime.parse(state.attendDay.checkOut!).toLocal())}",
-                                    style: AppTheme.latoTheme.displayLarge!)
-                                : Text("--:--"),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            const Text("Checkout")
-                          ],
-                        ),
+                      SizedBox(
+                        height: 20,
                       ),
-                      Expanded(
-                        child: Column(
-                          children: [
-                            SvgPicture.asset(AppImages.timertSvg),
-                            SizedBox(
-                              height: 10,
+                      const Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(Icons.location_on),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text("Location : You Are Not In Office Reach"),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 30,
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Column(
+                              children: [
+                                SvgPicture.asset(AppImages.timeInSvg),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                state.attendDay.checkIn != null
+                                    ? Text(
+                                        "${DateFormat('hh:mm').format(DateTime.parse(state.attendDay.checkIn!).toLocal())}",
+                                        style: AppTheme.latoTheme.displayLarge!)
+                                    : Text("--:--"),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                const Text("Checkin")
+                              ],
                             ),
-                            Text("${state.attendDay.workingHours}",
-                                style: AppTheme.latoTheme.displayLarge!),
-                            SizedBox(
-                              height: 10,
+                          ),
+                          Expanded(
+                            child: Column(
+                              children: [
+                                SvgPicture.asset(AppImages.timeOutSvg),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                state.attendDay.checkOut!.isNotEmpty
+                                    ? Text(
+                                        "${DateFormat('hh:mm').format(DateTime.parse(state.attendDay.checkOut!).toLocal())}",
+                                        style: AppTheme.latoTheme.displayLarge!)
+                                    : Text("--:--"),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                const Text("Checkout")
+                              ],
                             ),
-                            const Text("working hr's")
-                          ],
-                        ),
+                          ),
+                          Expanded(
+                            child: Column(
+                              children: [
+                                SvgPicture.asset(AppImages.timertSvg),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Text(
+                                    state.attendDay.workingHours != null
+                                        ? "${state.attendDay.workingHours}"
+                                        : "--:--",
+                                    style: AppTheme.latoTheme.displayLarge!),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                const Text("working hr's")
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 10,
                       ),
                     ],
                   );
                 } else {
-                  return Container(
-                    child: Center(
-                      child: CircularProgressIndicator(
-                          color: AppColors.primaryColor),
-                    ),
-                  );
+                  return Container();
                 }
               },
-            ),
-            SizedBox(
-              height: 10,
             ),
           ],
         ),

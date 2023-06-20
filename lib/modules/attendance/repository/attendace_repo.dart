@@ -17,6 +17,7 @@ class AuttendaceRepository {
     final Response?  response = await ApiService.getApi(
         ApiPaths.dayAttendanceacePath,
         isAuth: true);
+          print("kokoko ${response!.data}");
       return GenericResponse(fromJson: DayAttendaceModel.fromJson,json: response!.data,isList: false);
   }
 }

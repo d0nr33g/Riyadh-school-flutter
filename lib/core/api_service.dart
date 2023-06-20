@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:chucker_flutter/chucker_flutter.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:riyad/core/app_config.dart';
@@ -164,7 +165,9 @@ class ApiService {
         baseUrl: AppConfig.getAppBaseUrl(),
       ),
     );
-    dio.interceptors.add(PrettyDioLogger());
+   // Dio().interceptors.add(ChuckerDioInterceptor());
+
+    dio.interceptors.add(ChuckerDioInterceptor());
     //call api
     if (isAuth) {
       await AppShared.getToken();
