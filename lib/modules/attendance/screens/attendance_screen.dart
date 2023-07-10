@@ -112,7 +112,7 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
                         const SizedBox(
                           height: 10,
                         ),
-                        Text("${state.attendDay.workingHours}", style: AppTheme.latoTheme.displayLarge!),
+                        Text(state.attendDay.workingHours!=null?"${state.attendDay.workingHours}":"--:--", style: AppTheme.latoTheme.displayLarge!),
                         const SizedBox(
                           height: 10,
                         ),
