@@ -43,7 +43,7 @@ dependencies:
   flutter_screenutil: ^5.8.2
   qr_code_scanner: ^1.0.1
   flutter_svg: ^2.0.6
-  location: ^4.4.0
+  geolocator: ^9.0.2
   local_auth: ^2.1.6
   intl: ^0.18.0
   dio: ^5.2.1+1
