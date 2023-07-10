@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:riyad/core/api_path.dart';
 import 'package:riyad/core/api_service.dart';
 import 'package:riyad/core/app_shared.dart';
@@ -7,6 +8,7 @@ import 'package:riyad/modules/scan_auth/model/auth_model.dart';
 
 class AuthRepository {
   static Future<GenericResponse<AuthModel>> loginUser(String qrCode) async {
+    String? fireToken = await FirebaseMessaging.instance.getToken();
     final Response?  response = await ApiService.postApi(
         ApiPaths.userLoginPath,
         body: <String, dynamic>{"token": qrCode},

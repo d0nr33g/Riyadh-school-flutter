@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>284549499714-u5t77urv2m2u06o8n4etcep6l20cmavb.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.284549499714-u5t77urv2m2u06o8n4etcep6l20cmavb</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBmc4Edig0yHbFsBG61RJY_7MPVHc41Cpk</string>
+	<key>GCM_SENDER_ID</key>
+	<string>284549499714</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.riyadh.school</string>
+	<key>PROJECT_ID</key>
+	<string>schools-attendance</string>
+	<key>STORAGE_BUCKET</key>
+	<string>schools-attendance.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:284549499714:ios:acdc17000e309a6fb0d6db</string>
+</dict>
+</plist>

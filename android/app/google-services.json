@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "284549499714",
+    "project_id": "schools-attendance",
+    "storage_bucket": "schools-attendance.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:284549499714:android:00ad6c491d45275bb0d6db",
+        "android_client_info": {
+          "package_name": "com.riyadh.school"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "284549499714-65gk79u50nba1rgh9uaao6gsbfsi2d8p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBm_FpI1OWcO3TGh1wxtPVvbyUI6JFAv78"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "284549499714-65gk79u50nba1rgh9uaao6gsbfsi2d8p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

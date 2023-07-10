@@ -4,7 +4,7 @@ import 'package:riyad/core/app_colors.dart';
 import 'package:riyad/core/app_images.dart';
 import 'package:riyad/modules/attendance/screens/attendance_screen.dart';
 import 'package:riyad/modules/home/home_screen.dart';
-import 'package:riyad/modules/notifications/notification_screen.dart';
+import 'package:riyad/modules/notifications/screens/notification_screen.dart';
 import 'package:riyad/modules/settings/settings_screen.dart';
 
 class AppBottomNavigationBar extends StatefulWidget {

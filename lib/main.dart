@@ -1,5 +1,6 @@
 import 'package:chucker_flutter/chucker_flutter.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -14,6 +15,7 @@ import 'package:riyad/modules/attendance/bloc/bloc/daily_attend_bloc.dart';
 import 'package:riyad/modules/home/bloc/bloc/checkout_bloc.dart';
 import 'package:riyad/modules/home/bloc/clock_cubit.dart';
 import 'package:riyad/modules/home/bloc/home_bloc/home_bloc.dart';
+import 'package:riyad/modules/notifications/bloc/notification_bloc.dart';
 import 'package:riyad/modules/scan_auth/bloc/auth_bloc.dart';
 import 'package:riyad/splash_screen.dart';
 import 'package:timezone/data/latest.dart' as tz;
@@ -21,6 +23,7 @@ import 'package:timezone/data/latest.dart' as tz;
  main() async {
   debugPrint("############ welcome in dev ############");
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   await EasyLocalization.ensureInitialized();
    tz.initializeTimeZones();
   SystemChrome.setPreferredOrientations(<DeviceOrientation>[
@@ -69,6 +72,9 @@ class App extends StatelessWidget {
                 ),
                      BlocProvider(
                   create: (_) => CheckoutBloc(),
+                ),
+                BlocProvider(
+                  create: (_) => NotificationBloc(),
                 ),
               ],
               child: MaterialApp(

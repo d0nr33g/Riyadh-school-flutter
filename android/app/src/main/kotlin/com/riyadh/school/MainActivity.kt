@@ -1,4 +1,4 @@
-package com.example.riyad
+package com.riyadh.school
 
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.android.FlutterFragmentActivity

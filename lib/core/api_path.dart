@@ -6,4 +6,5 @@ class ApiPaths {
   static const String checkOutPath = "/attendances/check-out";
   static const String weeklyAttendacePath = "/attendances/weekly-attendances";
   static const String dayAttendanceacePath = "/attendances/day-attendance";
+  static const String notificationPath = "/notifications/employee";
 }
