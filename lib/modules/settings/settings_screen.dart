@@ -17,6 +17,13 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
+  String userId="";
+  getUserId()async{
+    SharedPreferences preferences=await SharedPreferences.getInstance();
+    setState(() {
+      userId= preferences.getString("userId")!;
+    });
+  }
   logOut() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     preferences.clear();
@@ -26,7 +33,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
           MaterialPageRoute(builder: (_) => const ScanAuth()),
           (route) => false);
   }
-
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getUserId();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,7 +69,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   SizedBox(
                     height: 20,
                   ),
-                  Text("6546445",
+                  Text("$userId",
                       style: AppTheme.latoTheme.displayMedium!
                           .copyWith(fontWeight: FontWeight.bold)),
                   SizedBox(

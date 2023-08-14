@@ -14,6 +14,8 @@ import 'package:riyad/modules/home/components/checkOut_component.dart';
 import 'package:riyad/modules/home/components/clock_component.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../notifications/screens/notification_screen.dart';
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -97,7 +99,11 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-
+@override
+  void dispose() {
+  stopListening();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -157,13 +163,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                       AppImages.notificationCircleSvg),
                                   Positioned(
                                       bottom: 20,
-                                      right: 18,
-                                      child: Text(
-                                        "27",
-                                        style: AppTheme.latoTheme.displayMedium!
-                                            .copyWith(
-                                                color: AppColors.whiteColor,
-                                                fontWeight: FontWeight.bold),
+                                      right:N.notificationLength>9? MediaQuery.sizeOf(context).width/22:MediaQuery.sizeOf(context).width/16,
+                                      child: Center(
+                                        child: Text(
+                                          "${N.notificationLength}",
+                                          style: AppTheme.latoTheme.displayMedium!
+                                              .copyWith(
+                                                  color: AppColors.whiteColor,
+                                                  fontWeight: FontWeight.bold),
+                                        ),
                                       )),
                                 ],
                               )

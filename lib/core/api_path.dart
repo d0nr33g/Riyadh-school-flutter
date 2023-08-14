@@ -1,5 +1,6 @@
 class ApiPaths {
-  static const String baseUrl = "https://schools-attendance-server.onrender.com/api";
+  //https://schools-attendance-server.onrender.com/api
+  static const String baseUrl = "https://ap.riyadhschools.edu.sa/api";
 
   static const String userLoginPath = "/auth/user/login";
   static const String checkInPath = "/attendances/check-in";

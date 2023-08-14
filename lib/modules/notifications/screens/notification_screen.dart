@@ -47,6 +47,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                 ),
               );
             } else if (state is NotificationLoaded) {
+              N.notificationLength=state.notificationModel.length;
               return ListView.builder(
                   itemCount: state.notificationModel.length,
                   itemBuilder: (context, index) {
@@ -79,4 +80,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
       ),
     );
   }
+}
+class N{
+  static int notificationLength=0;
 }
