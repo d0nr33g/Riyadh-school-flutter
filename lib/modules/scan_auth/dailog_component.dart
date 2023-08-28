@@ -1,8 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:riyad/bottom_nav_bar/bottom_nav_bar.dart';
 import 'package:riyad/core/app_colors.dart';
 import 'package:riyad/core/app_images.dart';
 import 'package:riyad/core/app_theme.dart';
@@ -18,7 +19,7 @@ Future<void> showLocationDialog(context) async {
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
         child: SizedBox(
-          width: MediaQuery.of(context).size.width/1, // Custom width
+          width: MediaQuery.of(context).size.width / 1, // Custom width
           height: 412.0, // Custom height
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -118,7 +119,7 @@ Future<void> showCameraDialog(context) async {
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
         child: SizedBox(
-           width: MediaQuery.of(context).size.width/1, // Custom width
+          width: MediaQuery.of(context).size.width / 1, // Custom width
           height: 412.0, // Custom height
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -218,7 +219,7 @@ Future<void> showFingerprintDialog(context) async {
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
         child: SizedBox(
-        width: MediaQuery.of(context).size.width/1, // Custom width
+          width: MediaQuery.of(context).size.width / 1, // Custom width
           height: 422.0, // Custom height
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -311,6 +312,10 @@ Future<void> showFingerprintDialog(context) async {
 
 getLocationpermission(context) async {
   PermissionStatus status = await Permission.location.request();
+  if (Platform.isIOS) {
+    Navigator.pop(context);
+    showCameraDialog(context);
+  }
   if (status.isGranted) {
     // Location permission granted
     print("mohamed");
@@ -326,6 +331,10 @@ getLocationpermission(context) async {
 }
 
 getCameraPermission(context) async {
+  if (Platform.isIOS) {
+    Navigator.pop(context);
+    showFingerprintDialog(context);
+  }
   PermissionStatus status = await Permission.camera.request();
   if (status.isGranted) {
     // Location permission granted
@@ -342,7 +351,7 @@ getCameraPermission(context) async {
 }
 
 getFingerprintPermission(context) async {
-    SharedPreferences preferences = await SharedPreferences.getInstance();
+  SharedPreferences preferences = await SharedPreferences.getInstance();
 
   final LocalAuthentication auth = LocalAuthentication();
 
@@ -350,12 +359,9 @@ getFingerprintPermission(context) async {
       await auth.getAvailableBiometrics();
 
   if (availableBiometrics.isNotEmpty) {
-    preferences.setBool("notFirstTime",true);
+    preferences.setBool("notFirstTime", true);
     Navigator.pop(context);
-        Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(builder: (_) => const ScanAuth()),
-          (route) => false);
- 
+    Navigator.pushAndRemoveUntil(context,
+        MaterialPageRoute(builder: (_) => const ScanAuth()), (route) => false);
   }
 }
