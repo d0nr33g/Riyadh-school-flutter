@@ -20,11 +20,11 @@ class _ClockComponentState extends State<ClockComponent> {
       builder: (context, state) {
         return Column(
           children: [
-            Text("${DateFormat('hh:mm a').format(state).toLocale()}",
+            Text("${DateFormat('hh:mm a',context.locale.toString()).format(state).toLocale()}",
                 textAlign: TextAlign.center,
                 style: AppTheme.latoTheme.displayLarge!.copyWith(fontSize: 51)),
             Text(
-              "${DateFormat('EEEE, MMM d').format(state).toLocale()}",
+              "${DateFormat('EEEE, MMM d',context.locale.toString()).format(state).toLocale()}",
               textAlign: TextAlign.center,
               style: AppTheme.latoTheme.displayLarge!
                   .copyWith(fontSize: 25, color: AppColors.textColor),

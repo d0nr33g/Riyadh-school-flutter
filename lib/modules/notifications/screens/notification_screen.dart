@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -29,8 +30,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
         iconTheme: const IconThemeData(color: AppColors.blackColor),
         elevation: 0,
         backgroundColor: AppColors.whiteColor,
-        title: const Text(
-          "Notifications",
+        title:  Text(
+          "Notifications".tr(),
           style: TextStyle(color: AppColors.blackColor),
         ),
         centerTitle: true,

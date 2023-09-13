@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:riyad/core/app_colors.dart';
@@ -45,22 +46,22 @@ class _AppBottomNavigationBarState extends State<AppBottomNavigationBar> {
           BottomNavigationBarItem(
             activeIcon: SvgPicture.asset(AppImages.selectedHomeSvg),
             icon:SvgPicture.asset(AppImages.homeSvg),
-            label: 'HOME',
+            label: 'HOME'.tr(),
           ),
           BottomNavigationBarItem(
             activeIcon: SvgPicture.asset(AppImages.selectedNotificationsSvg),
             icon: SvgPicture.asset(AppImages.accountSvg),
-            label: 'NOTIFICATION',
+            label: 'Notifications'.tr(),
           ),
           BottomNavigationBarItem(
             activeIcon: SvgPicture.asset(AppImages.selectedAttendSvg),
             icon:SvgPicture.asset(AppImages.calendarSvg),
-            label: 'ATTENDANCE',
+            label: 'Attendance'.tr(),
           ),
           BottomNavigationBarItem(
             activeIcon: SvgPicture.asset(AppImages.selectedSettingsSvg),
             icon: SvgPicture.asset(AppImages.settingsSvg),
-            label: 'SETTINGS',
+            label: 'Settings'.tr(),
           ),
         ],
         currentIndex: _selectedIndex,

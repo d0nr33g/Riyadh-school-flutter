@@ -4,7 +4,7 @@ import 'package:riyad/core/app_colors.dart';
 import 'package:riyad/core/app_theme.dart';
 
 Future<void> showLanguageDialog(context) async {
-  bool isEnglish = true;
+  //bool isEnglish = true;
   return showDialog<void>(
     context: context,
     barrierDismissible: true, // user must tap button!
@@ -20,7 +20,7 @@ Future<void> showLanguageDialog(context) async {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Text(
-                      "Language",
+                      "language".tr(),
                       style: AppTheme.latoTheme.bodyMedium!
                           .copyWith(fontWeight: FontWeight.bold),
                     ),
@@ -31,7 +31,7 @@ Future<void> showLanguageDialog(context) async {
                           child: InkWell(
                             onTap: () {
                               setState(() {
-                                isEnglish = true;
+                              //  isEnglish = true;
                                   Navigator.pop(context);
                                   // changeLocale(context, "en");
                                    context.setLocale(Locale('en', 'US'));
@@ -41,7 +41,7 @@ Future<void> showLanguageDialog(context) async {
                               height: 126,
                               decoration: BoxDecoration(
                                   color:
-                                      isEnglish ? AppColors.primaryColor : null,
+                                      context.locale==Locale('en', 'US') ? AppColors.primaryColor : null,
                                   borderRadius: BorderRadius.circular(20),
                                   border:
                                       Border.all(color: AppColors.textColor)),
@@ -56,7 +56,7 @@ Future<void> showLanguageDialog(context) async {
                                       "EN",
                                       style: AppTheme.latoTheme.bodyMedium!
                                           .copyWith(
-                                              color: isEnglish
+                                              color:   context.locale==Locale('en', 'US')
                                                   ? AppColors.primaryColor
                                                   : AppColors.textColor),
                                     ),
@@ -68,7 +68,7 @@ Future<void> showLanguageDialog(context) async {
                                     "English",
                                     style: AppTheme.latoTheme.bodyMedium!
                                         .copyWith(
-                                            color: isEnglish
+                                            color:   context.locale==Locale('en', 'US')
                                                 ? AppColors.whiteColor
                                                 : AppColors.textColor),
                                   )
@@ -84,7 +84,7 @@ Future<void> showLanguageDialog(context) async {
                           child: InkWell(
                             onTap: () {
                               setState(() {
-                                isEnglish = false;
+                             
                                 Navigator.pop(context);
                                // changeLocale(context, "ar");
                                context.setLocale(Locale('ar', 'EG'));
@@ -94,7 +94,7 @@ Future<void> showLanguageDialog(context) async {
                             child: Container(
                               height: 126,
                               decoration: BoxDecoration(
-                                  color: !isEnglish
+                                  color:   context.locale!=Locale('en', 'US')
                                       ? AppColors.primaryColor
                                       : null,
                                   borderRadius: BorderRadius.circular(20),
@@ -111,7 +111,7 @@ Future<void> showLanguageDialog(context) async {
                                       "AR",
                                       style: AppTheme.latoTheme.bodyMedium!
                                           .copyWith(
-                                              color: !isEnglish
+                                              color:  context.locale!=Locale('en', 'US')
                                                   ? AppColors.primaryColor
                                                   : AppColors.textColor),
                                     ),
@@ -123,7 +123,7 @@ Future<void> showLanguageDialog(context) async {
                                     "Arabic",
                                     style: AppTheme.latoTheme.bodyMedium!
                                         .copyWith(
-                                            color: !isEnglish
+                                            color:   context.locale!=Locale('en', 'US')
                                                 ? AppColors.whiteColor
                                                 : AppColors.textColor),
                                   )

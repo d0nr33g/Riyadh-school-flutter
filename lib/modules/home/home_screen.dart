@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -124,10 +125,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 if (userId != null)
                   Text(
-                    "${userId}",
+                    "${userName}",
                     style: AppTheme.latoTheme.displayMedium,
                   ),
-                const Text("ID Number"),
+                 Text("UserName".tr()),
               ],
             ),
             ClockComponent(),
@@ -192,7 +193,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           SizedBox(
                             width: 10,
                           ),
-                          Text("Location : $lat:$lang"),
+                       //   Text("Location : $lat:$lang"),
+                       Text("Inside Riyahd Schools")
                         ],
                       ),
                       const SizedBox(
@@ -215,7 +217,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 SizedBox(
                                   height: 10,
                                 ),
-                                const Text("Checkin")
+                                 Text("Checkin".tr())
                               ],
                             ),
                           ),
@@ -234,7 +236,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 SizedBox(
                                   height: 10,
                                 ),
-                                const Text("Checkout")
+                                 Text("Checkout".tr())
                               ],
                             ),
                           ),
@@ -253,7 +255,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 SizedBox(
                                   height: 10,
                                 ),
-                                const Text("working hr's")
+                                 Text("workinghrs".tr())
                               ],
                             ),
                           ),

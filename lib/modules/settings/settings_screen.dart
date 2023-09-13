@@ -18,10 +18,12 @@ class SettingsScreen extends StatefulWidget {
 
 class _SettingsScreenState extends State<SettingsScreen> {
   String userId="";
+  String userName="";
   getUserId()async{
     SharedPreferences preferences=await SharedPreferences.getInstance();
     setState(() {
       userId= preferences.getString("userId")!;
+      userName = preferences.getString("userName")!;
     });
   }
   logOut() async {
@@ -46,8 +48,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
         iconTheme: const IconThemeData(color: AppColors.blackColor),
         elevation: 0,
         backgroundColor: AppColors.whiteColor,
-        title: const Text(
-          "Settings",
+        title:  Text(
+          "Settings".tr(),
           style: TextStyle(color: AppColors.blackColor),
         ),
         centerTitle: true,
@@ -69,13 +71,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   SizedBox(
                     height: 20,
                   ),
-                  Text("$userId",
+                  Text("$userName",
                       style: AppTheme.latoTheme.displayMedium!
                           .copyWith(fontWeight: FontWeight.bold)),
                   SizedBox(
                     height: 10,
                   ),
-                  Text("ID Number"),
+                  Text("UserName".tr()),
                 ],
               ),
               ListTile(
@@ -89,7 +91,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
               ListTile(
                 onTap: () {},
-                title: Text("CONTACT US",
+                title: Text("CONTACTUS".tr(),
                     style: AppTheme.latoTheme.bodyMedium!
                         .copyWith(fontWeight: FontWeight.w500)),
                 leading: SvgPicture.asset(AppImages.callSvg),
@@ -99,7 +101,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   Navigator.push(
                       context, MaterialPageRoute(builder: (_) => AboutUS()));
                 },
-                title: Text("ABOUT US",
+                title: Text("ABOUTUS".tr(),
                     style: AppTheme.latoTheme.bodyMedium!
                         .copyWith(fontWeight: FontWeight.w500)),
                 leading: SvgPicture.asset(AppImages.infoSvg),
@@ -108,7 +110,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 onTap: () {
                 logOut();
                 },
-                title: Text("LOGOUT",
+                title: Text("LOGOUT".tr(),
                     style: AppTheme.latoTheme.bodyMedium!
                         .copyWith(fontWeight: FontWeight.w500)),
                 leading: SvgPicture.asset(AppImages.logoutSvg),

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -34,8 +35,8 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
         iconTheme: const IconThemeData(color: AppColors.blackColor),
         elevation: 0,
         backgroundColor: AppColors.whiteColor,
-        title: const Text(
-          "Attendance",
+        title:  Text(
+          "Attendance".tr(),
           style: TextStyle(color: AppColors.blackColor),
         ),
         centerTitle: true,
@@ -66,11 +67,11 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
                         const SizedBox(
                           height: 10,
                         ),
-                        Text("Days", style: AppTheme.latoTheme.displayLarge!),
+                        Text("Days".tr(), style: AppTheme.latoTheme.displayLarge!),
                         const SizedBox(
                           height: 10,
                         ),
-                        const Text("per Week")
+                         Text("per Week".tr())
                       ],
                     ),
                   ),
@@ -82,11 +83,11 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
                           height: 10,
                         ),
                         state.attendDay.checkIn!=null?
-                        Text( "${DateFormat('hh:mm').format(DateTime.parse(state.attendDay.checkIn!).toLocal())}", style: AppTheme.latoTheme.displayLarge!):Text("--:--"),
+                        Text( "${DateFormat('hh:mm',context.locale.toString()).format(DateTime.parse(state.attendDay.checkIn!).toLocal())}", style: AppTheme.latoTheme.displayLarge!):Text("--:--"),
                         const SizedBox(
                           height: 10,
                         ),
-                        const Text("Checkin")
+                         Text("Checkin".tr())
                       ],
                     ),
                   ),
@@ -97,11 +98,11 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
                         const SizedBox(
                           height: 10,
                         ),
-                        Text(state.attendDay.checkOut!.isNotEmpty?"${DateFormat('hh:mm').format(DateTime.parse(state.attendDay.checkOut!).toLocal())}": "--:--", style: AppTheme.latoTheme.displayLarge!),
+                        Text(state.attendDay.checkOut!.isNotEmpty?"${DateFormat('hh:mm',context.locale.toString()).format(DateTime.parse(state.attendDay.checkOut!).toLocal())}": "--:--", style: AppTheme.latoTheme.displayLarge!),
                         const SizedBox(
                           height: 10,
                         ),
-                        const Text("Checkout")
+                         Text("Checkout".tr())
                       ],
                     ),
                   ),
@@ -116,7 +117,7 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
                         const SizedBox(
                           height: 10,
                         ),
-                        const Text("working hr's")
+                         Text("workinghrs".tr())
                       ],
                     ),
                   ),
@@ -159,7 +160,7 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Text(
-                                          "${DateFormat('EE').format(DateTime.parse(data.checkIn!).toLocal())}",
+                                          "${DateFormat('EE',context.locale.toString()).format(DateTime.parse(data.checkIn!).toLocal())}",
                                           style: AppTheme
                                               .latoTheme.displayLarge!
                                               .copyWith(
@@ -178,7 +179,7 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
                                     children: [
                                       data.checkOut != null
                                           ? Text(
-                                              "${DateFormat('hh:mm').format(DateTime.parse(data.checkIn!).toLocal())}",
+                                              "${DateFormat('hh:mm',context.locale.toString()).format(DateTime.parse(data.checkIn!).toLocal())}",
                                               style: AppTheme
                                                   .latoTheme.displayLarge!
                                                   .copyWith(
@@ -212,7 +213,7 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
                                     children: [
                                       data.checkOut != null
                                           ? Text(
-                                              "${DateFormat('hh:mm').format(DateTime.parse(data.checkOut!).toLocal())}",
+                                              "${DateFormat('hh:mm',context.locale.toString()).format(DateTime.parse(data.checkOut!).toLocal())}",
                                               style: AppTheme
                                                   .latoTheme.displayLarge!
                                                   .copyWith(
